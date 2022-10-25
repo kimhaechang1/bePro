@@ -1,11 +1,12 @@
 import Header from '../components/Header';
-function QnABoard(){
+function Result(){
     return(
         <div>
             <Header/>
-            QnA페이지입니다.
+            검색결과 페이지입니다.
         </div>
     )
+
 }
 
-export default QnABoard;
+export default Result;

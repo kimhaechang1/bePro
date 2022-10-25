@@ -1,6 +1,8 @@
 import '../App.css';
+import '../components/css/SignIn.css'
 import '../components/css/Card.css';
 import '../components/css/Header.css';
+import '../components/css/SignUp.css';
 import Header from '../components/Header';
 import Card from '../components/Card';
 

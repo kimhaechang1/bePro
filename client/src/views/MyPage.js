@@ -1,12 +1,11 @@
 import Header from '../components/Header';
-function Dic(){
+function MyPage(){
     return(
         <div>
             <Header/>
-            용어사전 페이지입니다.
+            마이페이지 입니다.
         </div>
     )
-
 }
 
-export default Dic;
+export default MyPage;

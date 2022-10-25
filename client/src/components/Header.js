@@ -1,5 +1,10 @@
+import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import SignIn from './SignIn';
+import SignUp from './SignUp';
 function Header(){
+    const [signIn, setSignIn] = useState(false);
+    const [signUp, setSignUp] = useState(false);
     return(
         <div className="area">
             <div className="innerArea">
@@ -7,10 +12,11 @@ function Header(){
                 <Link to="/"><div className="headerTitle">TITLE</div></Link>
                     <div className="headerTools">
                         <ul className="headerToolTitle">
-                            <Link to="/QnA/*"><li>QnA</li></Link>
-                            <Link to="/Dic/*"><li>용어사전</li></Link>
-                            <Link to="/"><li>Sign in</li></Link>
-                            <Link to="/"><li>Sign up</li></Link>
+                            <Link to="/MyPage/*"><li>마이페이지</li></Link>
+                            <li onClick={()=>{ setSignIn(true)}}>Sign in</li>
+                            {signIn ? <SignIn forClose={setSignIn}/> : null }
+                            <li onClick={()=>{setSignUp(true)}}>Sign up</li>
+                            {signUp ? <SignUp forClose={setSignUp}/> : null}
                         </ul>
                     </div>
                 </div>
