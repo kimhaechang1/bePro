@@ -84,3 +84,7 @@ input::placeholder{
     outline: none;
     box-sizing: border-box;
 }
+.radio{
+    margin-left: 8px;
+    margin-right: 40px;
+}
