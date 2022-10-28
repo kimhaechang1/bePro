@@ -1,11 +1,12 @@
 import axios from 'axios';
 function axiosLoginData(data){
-    let request = {
-        loginSuccess : "",
-        cookie : "",
-        nick : "",
-        msg : ""
+    let request = { 
+        loginSuccess : "", // true or false
+        cookie : "", // jwt token
+        nick : "", // 닉네임
+        msg : "" // 로그인 성공, 로그인 실패 등등
     }
+    
     // 로그인 로직
     /*
      일단은 로컬 로직으로 로그인이 가능하게 되도록 설정 해 둠
@@ -22,17 +23,21 @@ function axiosLoginData(data){
         request['loginSuccess'] = false;
         request['msg'] = "로그인에 실패하였습니다.";
     }
-    /*axios.post('/user/login',data)
+    if(request.loginSuccess){
+        localStorage.setItem("token",JSON.stringify({value:request.cookie, nick:request.nick}));
+    }
+
+    /*const request = axios.post('/user/login',data)
     .then(response =>
-        request['loginSuccess'] = response.loginSuccess; // true or false
-        request['cookie'] = response.cookie; // jwt token
-        request['nick'] = response.nick; // 닉네임
-        request['msg'] = response.msg; // 로그인 성공, 로그인 실패 등등
+        response.data
     )*/
 
     return {
         resultData : request
     }
+    /*
+    return request;
+    */
 }
 
 

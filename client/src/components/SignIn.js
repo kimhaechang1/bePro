@@ -14,11 +14,21 @@ function SignIn(props){
         const result = axiosLoginData(loginData);
         if(result.resultData.loginSuccess){
             alert(result.resultData.msg);
-            localStorage.setItem("token", JSON.stringify({value:result.resultData.cookie, nick:result.resultData.nick}));
             navigate(0);
         }else{
             alert(result.resultData.msg);
         }
+        /*
+        const result = axiosLoginData(loginData);
+        result.then(data => {
+            if(data.loginSuccess){
+                alert(data.msg);
+                navigate(0);
+            }else{
+                alert(data.msg);
+            }
+        })
+        */
     }
     return(
         <div className="modal">
@@ -36,4 +46,4 @@ function SignIn(props){
         </div>
     )
 }
-export default SignIn
+export default SignIn;
