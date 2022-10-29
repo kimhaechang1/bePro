@@ -33,14 +33,16 @@ function SignIn(props){
     return(
         <div className="modal">
             <div className="loginModal">
-                <span className="close" onClick={()=>{props.forClose(false)}}>X</span>
+                <span className="close" onClick={()=>{props.forClose(false)}}>x</span>
                 <form onSubmit={onSubmitHandler}>
                     <div className="modalContents">
                         <input type="text" className="loginId" placeholder="아이디" value={id} onChange={(e)=>{setId(e.target.value)}}></input>
                         <input type="password" className="loginPw" placeholder="비밀번호" value={pw} onChange={(e)=>{setPw(e.target.value)}}></input>
                     </div>
                     <br/>
-                    <button>Submit</button>                    
+                    <div className="loginArea">
+                        <button className="loginBtn">로그인</button>       
+                    </div>             
                 </form>
             </div>
         </div>

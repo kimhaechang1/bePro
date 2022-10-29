@@ -1,3 +1,7 @@
+@font-face {
+    font-family: "MapleFont";
+    src: url("../fonts/Maplestory\ Light.ttf");
+  }
 .modal{
     position: fixed;
     top: 0;
@@ -17,15 +21,18 @@
     background: #fff; 
 }
 .close{
+    position:absolute;
+    top:12px;
+    right:20px;
     cursor: pointer;
-    float: right;
     font-size: 25px;
+    z-index:1000;
 }
 .modalContents{
     margin: 0 auto;
     width: 100%;
     position: relative;
-    padding: 0 20px 32px;
+    padding: 0 10px;
     box-sizing: border-box;
     display: flex;
     justify-content: center;
@@ -54,3 +61,20 @@ input::placeholder{
     outline: none;
     box-sizing: border-box;
 }
+.loginArea{
+    text-align: center;
+}
+.loginBtn{
+    font-family: MapleFont;
+    letter-spacing: 1px;
+    font-size:20px;
+    color:#817f7f;
+    background-color: transparent ;
+    border:0px;
+    cursor: pointer;
+}
+.loginBtn:hover{
+    text-shadow: 0 0 4px #fff, 0 0 8px #fff, 
+        0 0 12px #e2fff4, 0 0 15px #a1fff2;
+}
+    
