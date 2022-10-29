@@ -35,11 +35,12 @@ function Header(){
         <div className="area">
             <div className="innerArea">
                 <div className="contentArea">
-                <Link to="/"><div className="headerTitle">TITLE</div></Link>
+                <Link to="/"><div className="headerTitle">be전공자</div></Link>
                     <div className="headerTools">
                         <ul className="headerToolTitle">
                             {token ? UI['loginSuccess1'] : UI['SignIn']}
                             {signIn ? <SignIn forClose={setSignIn} forNick={setNick}/> : null}
+                            <span>|</span>
                             {token ? UI['loginSuccess2'] : UI['SignUp']}
                             {signUp ? <SignUp forClose={setSignUp}/> : null }
                         </ul>

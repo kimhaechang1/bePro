@@ -59,7 +59,7 @@ function SignUp(props){
                             아니오<input value="0" type="radio" name="jeon" onClick={()=>{set전공입력(false)}}></input>
                         </span>
                         {전공입력 ? <input type="text" className="SignUpJeon" value={major} onChange={(e)=>{setMajor(e.target.value)}} placeholder="전공입력 ex) 컴퓨터공학과"></input> : null}
-                        <button>Submit</button>
+                        <button className="SignUpBtn">가입하기</button>
                     </form>
                 </div>
             </div>

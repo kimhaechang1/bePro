@@ -40,7 +40,9 @@ function SignIn(props){
                         <input type="password" className="loginPw" placeholder="비밀번호" value={pw} onChange={(e)=>{setPw(e.target.value)}}></input>
                     </div>
                     <br/>
-                    <button>Submit</button>                    
+                    <div className="loginArea">
+                        <button className="loginBtn">로그인</button>       
+                    </div>             
                 </form>
             </div>
         </div>
