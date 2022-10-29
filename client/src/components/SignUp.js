@@ -45,7 +45,7 @@ function SignUp(props){
     return(
         <div className="modal">
             <div className="SignUpModal">
-                <span className="close" onClick={()=>{props.forClose(false)}}>X</span>
+                <span className="close" onClick={()=>{props.forClose(false)}}>x</span>
                 <div className="modalContents">
                     <form onSubmit={onSubmitHandler}>
                         <input type="text" className="SignUpId" value={id} onChange={(e)=>{setId(e.target.value)}} placeholder="아이디 입력"></input>

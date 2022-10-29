@@ -33,7 +33,7 @@ function SignIn(props){
     return(
         <div className="modal">
             <div className="loginModal">
-                <span className="close" onClick={()=>{props.forClose(false)}}>X</span>
+                <span className="close" onClick={()=>{props.forClose(false)}}>x</span>
                 <form onSubmit={onSubmitHandler}>
                     <div className="modalContents">
                         <input type="text" className="loginId" placeholder="아이디" value={id} onChange={(e)=>{setId(e.target.value)}}></input>
