@@ -4,6 +4,9 @@ div.cardArea{
     justify-content: space-around;
     
 }
+div.cardFrame{
+    width:900px;
+}
 /*@media (min-width:992px){
     div.card{
         width:100%;
@@ -15,6 +18,7 @@ div.cardArea{
     }
 }*/
 div.card{
+    margin-right: 20px;
     width:100%;
     text-align: center;
     padding: 10px;

@@ -93,6 +93,9 @@ ul.headerToolTitle li:hover{
     text-shadow: 0 0 2px #fff, 0 0 4px #fff, 
         0 0 6px #f7a6f0, 0 0 8px #fa74ff;
 }
+div.searchIcon{
+    margin-right: 10px;
+}
 /* title 
 h1.title { position: relative; }
 
