@@ -1,0 +1,17 @@
+번호.요청url
+요청:
+Get or POST
+파라메터(name: 예시값)
+응답:
+응답JSON
+예)
+1. /user/signout
+요청:
+Get
+Id: id
+응답:
+{
+        signOutSuccess : true or false,
+        msg : 로그아웃에 성공했습니다, 실패했습니다(오류내용).
+}
+-----------------------------------
