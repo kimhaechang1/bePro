@@ -74,7 +74,7 @@ function SignUp(props){
                 <div className="modalContents">
                     <form onSubmit={onSubmitHandler}>
                         <input type="text" className="SignUpId" value={id} onChange={(e)=>{setId(e.target.value)}} placeholder="아이디 입력"></input>
-                        <input type="button" value="중복체크" onClick={onClickHandler}></input>
+                        <input type="button" className="JungbokBtn" value="중복체크" onClick={onClickHandler}></input>
                         <input type="email" className="SignUpEmail" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="이메일 입력"></input>
                         <input type="password" className="SignUpPw" value={pw} onChange={(e)=>{setPw(e.target.value)}} placeholder="비밀번호 입력"></input>
                         <input type="text" className="SignUpNick" value={nick} onChange={(e)=>{setNick(e.target.value)}} placeholder="닉네임 입력"></input>
