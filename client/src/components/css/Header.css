@@ -95,6 +95,7 @@ ul.headerToolTitle li:hover{
 }
 div.searchIcon{
     margin-right: 10px;
+    cursor: pointer;
 }
 /* title 
 h1.title { position: relative; }

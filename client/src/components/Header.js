@@ -4,19 +4,30 @@ import { useNavigate } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import axiosSignOut from '../axios/axiosSignOut';
-
+import SearchDropDown from './SearchDropDown';
+import axiosSearch from '../axios/axiosSearch';
 function Header(){
     const navigate= useNavigate();
     const [signIn, setSignIn] = useState(false);
     const [signUp, setSignUp] = useState(false);
+    const [searchBox, setSearchBox] = useState(false);
     const [nick, setNick] = useState("");
     const [token, setToken] = useState("");
+    const [searchData, setSearchData] = useState("");
+    
+    const onClickHandler = () =>{
+        axiosSearch(searchData);
+    }
 
     const signOutHandler = ()=>{
         const isLogOut = axiosSignOut();
         if(isLogOut){
             navigate(0);
         }
+    }
+    
+    const onSearchBoxHandler = () =>{
+        searchBox ? setSearchBox(false) : setSearchBox(true);
     }
 
     useEffect(() => {
@@ -26,12 +37,14 @@ function Header(){
             setToken(userData.value);
         }
     }, [token])
+
     const UI = {
         loginSuccess1 : <Link to="/MyPage/*"><li>마이페이지</li></Link> ,
         loginSuccess2 : <li onClick={()=>{signOutHandler()}}>Sign Out</li>,
         SignUp : <li onClick={()=>{setSignUp(true)}}>Sign up</li>,
         SignIn : <li onClick={()=>{setSignIn(true)}}>Sign in</li>
     }
+
     return(
         <div className="area">
             <div className="innerArea">
@@ -39,7 +52,10 @@ function Header(){
                 <Link to="/"><div className="headerTitle">be전공자</div></Link>
                     <div className="headerTools">
                         <ul className="headerToolTitle">
-                        <div className="searchIcon">
+                        {searchBox ? <input type="text" value={searchData} onChange={(e)=>{setSearchData(e.target.value)}}></input>: null}
+                        {searchBox ? <input type="button" value="검색" onClick={onClickHandler}></input> : null}
+                        {searchBox ? <SearchDropDown major={searchData}/> : null}
+                        <div className="searchIcon" onClick={onSearchBoxHandler}>
                         <svg version="1.0" xmlns="http://www.w3.org/2000/svg" width="17px" height="17px" viewBox="0 0 1244.000000 1280.000000"preserveAspectRatio="xMidYMid meet">
                             <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"fill="#000000" stroke="none">
                                 <path d="M4025 12789 c-1029 -79 -1969 -501 -2704 -1214 -985 -955 -1456
