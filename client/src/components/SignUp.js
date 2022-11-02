@@ -2,6 +2,7 @@ import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axiosSignUpData from '../axios/axiosSignUpData';
 import axiosLoginData from '../axios/axiosLoginData';
+import axiosIdDuplicateCheck from '../axios/axiosIdDuplicateCheck';
 function SignUp(props){
     const [전공입력, set전공입력] = useState(false);
     const [id, setId] = useState("");
@@ -9,6 +10,30 @@ function SignUp(props){
     const [pw, setPw] = useState("");
     const [nick, setNick] = useState("");
     const [major, setMajor] = useState("");
+
+    const onClickHandler = (e) => {
+        console.log(e.target);
+        let idValue = {
+            id : id
+        }
+        e.preventDefault();
+        const result  = axiosIdDuplicateCheck(idValue);
+        /* 아이디 중복체크 로직 */
+        /*result.then( data => {
+            if(data.idCheckSuccess){
+                alert(data.msg);
+                e.target.disabled=true;
+            }else{
+                alert(data.msg);
+            }
+        })*/
+        if(result.idCheckSuccess){
+            alert(result.msg);
+            e.target.disabled=true;
+        }else{
+            alert(result.msg);
+        }
+    }
 
     const navigate = useNavigate();
     /*
@@ -49,6 +74,7 @@ function SignUp(props){
                 <div className="modalContents">
                     <form onSubmit={onSubmitHandler}>
                         <input type="text" className="SignUpId" value={id} onChange={(e)=>{setId(e.target.value)}} placeholder="아이디 입력"></input>
+                        <input type="button" value="중복체크" onClick={onClickHandler}></input>
                         <input type="email" className="SignUpEmail" value={email} onChange={(e)=>{setEmail(e.target.value)}} placeholder="이메일 입력"></input>
                         <input type="password" className="SignUpPw" value={pw} onChange={(e)=>{setPw(e.target.value)}} placeholder="비밀번호 입력"></input>
                         <input type="text" className="SignUpNick" value={nick} onChange={(e)=>{setNick(e.target.value)}} placeholder="닉네임 입력"></input>
