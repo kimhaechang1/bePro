@@ -7,14 +7,6 @@
     src: url("../fonts/Maplestory\ Light.ttf");
 }
 
-@media (min-width: 992px){
-    div.area{
-        padding-left: 24px;
-        padding-right: 24px;
-        background-color: #31ffcb;
-    }
-}
-
 @media (min-width : 1660px){
     div.area{
         padding-left : 44px;
@@ -26,6 +18,8 @@ a{
 }
 div.area{
     /*border-bottom: 1px solid #878787;*/
+    padding-right: 24px;
+    background-color: #31ffcb;
     z-index: 1000;
 }
 @media (min-width:1200px){
