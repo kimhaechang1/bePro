@@ -5,6 +5,7 @@ import '../components/css/Header.css';
 import '../components/css/SignUp.css';
 import '../components/css/SideBar.css';
 import '../components/css/SearchDropDown.css';
+import '../components/css/HashTag.css';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import SideBar from '../components/SideBar';
