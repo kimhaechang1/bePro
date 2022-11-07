@@ -34,4 +34,8 @@ div.border{
     flex-direction: row;
     padding : 10px;
 }
-
+div.tagArea{
+    display:flex;
+    flex-direction:row;
+    gap: 10px;
+}

@@ -59,3 +59,12 @@ id : id
         idCheckSuccess : true or false,
         msg : 사용해도 좋습니다. 중복된 아이디가 존재합니다. 알 수 없는 이유로 실패했습니다.(그 외의 이유로 중복체크 실패 시)
 }
+
+5. /get/hashtag
+요청 : GET
+응답 : {
+        [
+                {name : "해시태그 명"},
+                {name : "해시태그 명"}
+        ]
+}
