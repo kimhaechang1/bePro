@@ -68,3 +68,23 @@ id : id
                 {name : "해시태그 명"}
         ]
 }
+
+6. /search
+요청 : POST
+inputValue : inputValue
+hashTags : hashTags // Array
+응답 : 
+[
+        {
+                post_title : 글제목,
+                post_uploader : 글쓴이,
+                post_uploadtime : 업로드 시간,
+                post_detail : 내용,
+                post_view : 조회수,
+                post_like : 추천수
+        },
+        {
+                ...
+        }
+        ...
+]
