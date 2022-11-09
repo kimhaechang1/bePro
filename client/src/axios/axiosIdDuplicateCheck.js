@@ -1,4 +1,5 @@
 import axios from "axios";
+//깃허브 테스트
 function axiosIdDuplicateCheck(id){
     // 백엔드 통신 이후 주석 해제
     /*const request = axios.post('/user/idcheck',id)
