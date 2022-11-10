@@ -1,5 +1,5 @@
 import axios from 'axios';
-function axiosLoginData(data){
+function axiosSignInData(data){
     let request = { 
         loginSuccess : "", // true or false
         cookie : "", // jwt token
@@ -41,4 +41,4 @@ function axiosLoginData(data){
 }
 
 
-export default axiosLoginData;
+export default axiosSignInData;

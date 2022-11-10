@@ -30,7 +30,7 @@ function MainPage(){
             <SideBar/>
             <div className="cardFrame">
             <div>
-                <SearchBox forValue={value} forsetValue={setValue}/>
+                <SearchBox forValue={value} hashTag={hashTag} forsetValue={setValue}/>
                 <SearchDropDown major={value} forDelText={setValue} setHashTag={setHashTag} forAppendHashTag={hashTag} />
                 <div className="tagArea" id="tags">
                   { hashTag.length > 0 ? hashTag.map(name =>(<HashTag forDelTag={hashTag} setHashTag={setHashTag} tagName={name} key={name}>{name}</HashTag>) ) : null }

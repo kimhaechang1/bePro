@@ -1,7 +1,7 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axiosSignUpData from '../axios/axiosSignUpData';
-import axiosLoginData from '../axios/axiosLoginData';
+import axiosLoginData from '../axios/axiosSignInData';
 import axiosIdDuplicateCheck from '../axios/axiosIdDuplicateCheck';
 function SignUp(props){
     const [전공입력, set전공입력] = useState(false);
@@ -18,15 +18,7 @@ function SignUp(props){
         }
         e.preventDefault();
         const result  = axiosIdDuplicateCheck(idValue);
-        /* 아이디 중복체크 로직 */
-        /*result.then( data => {
-            if(data.idCheckSuccess){
-                alert(data.msg);
-                e.target.disabled=true;
-            }else{
-                alert(data.msg);
-            }
-        })*/
+        console.log(result);
         if(result.idCheckSuccess){
             alert(result.msg);
             e.target.disabled=true;
@@ -52,6 +44,7 @@ function SignUp(props){
         }
         e.preventDefault();
         const result = axiosSignUpData(SignUpData);
+        console.log(result);
         result.then(data => {
             if(data.signUpSuccess){
                 alert(data.msg);

@@ -16,7 +16,7 @@ Id: id
 }
 -----------------------------------
 
-1. /user/login
+1. /user/signin
 요청 : POST
 id : id
 pw : pw
@@ -86,5 +86,36 @@ hashTags : hashTags // Array
         {
                 ...
         }
+        ...
+]
+
+7. /get/qnaTitle
+설명 : 최신 QnA 글 제목 구하기
+요청 : GET
+응답 : 
+{ 
+        QnA_title : [] // array형태로 글제목들 담기
+} 
+
+
+8. /get/gongjiTitle
+설명 : 공지사항 글 제목 구하기
+요청 : GET
+응답 : 
+[
+        { Gongji_title : 공지 글제목 },
+        {...},
+        ...
+]
+
+9. /get/viewDescending
+설명 : 조회수 내림차순으로
+요청 : GET
+응답 : 
+[
+        {
+                title : 글제목,
+                views : 해당 글 조회수
+        },
         ...
 ]

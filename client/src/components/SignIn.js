@@ -1,6 +1,6 @@
 import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
-import axiosLoginData from '../axios/axiosLoginData';
+import axiosSignInData from '../axios/axiosSignInData';
 function SignIn(props){
     const navigate = useNavigate();
     const [id, setId] = useState("");
@@ -11,7 +11,7 @@ function SignIn(props){
             password : pw
         }
         e.preventDefault();
-        const result = axiosLoginData(loginData);
+        const result = axiosSignInData(loginData);
         if(result.resultData.loginSuccess){
             alert(result.resultData.msg);
             navigate(0);
@@ -19,7 +19,7 @@ function SignIn(props){
             alert(result.resultData.msg);
         }
         /*
-        const result = axiosLoginData(loginData);
+        const result = axiosSignInData(loginData);
         result.then(data => {
             if(data.loginSuccess){
                 alert(data.msg);

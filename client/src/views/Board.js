@@ -1,6 +1,6 @@
 import Header from '../components/Header';
 import { useLocation } from 'react-router-dom';
-function Result(){
+function Board(){
     const location = useLocation();
     const contentData = location.state.content;
     return(
@@ -13,4 +13,4 @@ function Result(){
 
 }
 
-export default Result;
+export default Board;

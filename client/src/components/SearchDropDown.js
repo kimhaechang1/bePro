@@ -23,12 +23,10 @@ function SearchDropDown(props){
       props.forDelText("");
     }
     return(
-        <div className="dropDownBox">
+        <div key={"dropdown"} className="dropDownBox">
             {supportData.map((data, index)=>{
                 return(
-                  <>
-                    <div value={data.name} onClick={onClickHandler} style={{borderBottom:"1px solid black", cursor:"pointer"}} key={index}>{data.name}</div>
-                  </>
+                    <div key={data.name} onClick={onClickHandler} style={{borderBottom:"1px solid black", cursor:"pointer"}} >{data.name}</div>
                 )
             })}
         </div>

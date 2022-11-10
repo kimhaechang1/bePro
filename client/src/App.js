@@ -6,7 +6,7 @@ import {
 
 import MainPage from './views/MainPage';
 import MyPage from './views/MyPage';
-import Result from './views/Result';
+import Board from './views/Board';
 function App() {
   return (
     <Router>
@@ -14,7 +14,7 @@ function App() {
         <Routes>
           <Route path="/" element={<MainPage/>}/>
           <Route path="/MyPage/*" element={<MyPage/>}/>
-          <Route path="/Result/*" element={<Result/>}/>
+          <Route path="/Board/*" element={<Board/>}/>
         </Routes>
       </div>
     </Router>

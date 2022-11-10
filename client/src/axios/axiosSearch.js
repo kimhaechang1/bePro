@@ -1,8 +1,10 @@
 import axios from "axios";
 const axiosSearch = (inputValue, hashTags=[]) =>{
+    console.log("검색어 : "+inputValue);
+    console.log("해쉬태그들 : "+hashTags);
     if(inputValue.length<2 && hashTags.length<1){
-        alert("2글자 이상 혹은 태그를 선택 해 주세요");
-    }else{
+        return false;
+    }/*else{
         let data ={
             inputValue : inputValue,
             hashTags : hashTags
@@ -12,7 +14,7 @@ const axiosSearch = (inputValue, hashTags=[]) =>{
             response)
         
         return request
-    }
+    }*/
 }
     
 
