@@ -35,11 +35,12 @@ CREATE TABLE IF NOT EXISTS `member` (
   `member_idnum` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `member_id` varchar(16) NOT NULL,
   `member_password` varchar(64) NOT NULL,
+  `member_email` varchar(128) NOT NULL,
   `member_nickname` varchar(16) NOT NULL,
-  `member_major` varchar(32) NOT NULL,
+  `member_major` varchar(32) DEFAULT NULL,
   `member_token` varchar(256) DEFAULT NULL,
   PRIMARY KEY (`member_idnum`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 -- 내보낼 데이터가 선택되어 있지 않습니다.
 
@@ -59,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `post` (
 
 -- 테이블 bemajor.tag 구조 내보내기
 CREATE TABLE IF NOT EXISTS `tag` (
-  `tag_id` int(10) unsigned NOT NULL,
+  `tag_id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `tag_post_id` int(10) unsigned NOT NULL,
   `tag_detail` varchar(32) NOT NULL,
   PRIMARY KEY (`tag_id`)
