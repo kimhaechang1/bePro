@@ -16,7 +16,7 @@ Id: id
 }
 -----------------------------------
 
-1. /user/signin
+1. /user/signin ✅
 요청 : POST
 id : id
 pw : pw
@@ -51,7 +51,7 @@ major : major // 전공 명
         msg : 회원가입에 성공했습니다. 알 수 없는 이유로 실패했습니다.(그 외의 이유로 회원가입 실패 시)
 }
 
-4. /user/idcheck
+4. /user/idcheck ✅
 요청 : POST
 id : id
 응답 : 
