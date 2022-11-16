@@ -62,12 +62,12 @@ id : id
 
 5. /get/hashtag
 요청 : GET
-응답 : {
-        [
-                {name : "해시태그 명"},
-                {name : "해시태그 명"}
-        ]
-}
+응답 : 
+[
+        {name : "해시태그 명"},
+        {name : "해시태그 명"}
+]
+
 
 6. /search
 요청 : POST
@@ -89,33 +89,47 @@ hashTags : hashTags // Array
         ...
 ]
 
-7. /get/qnaTitle
+7. /get/mainqna
 설명 : 최신 QnA 글 제목 구하기
-요청 : GET
-응답 : 
-{ 
-        QnA_title : [] // array형태로 글제목들 담기
-} 
-
-
-8. /get/gongjiTitle
-설명 : 공지사항 글 제목 구하기
-요청 : GET
-응답 : 
-[
-        { Gongji_title : 공지 글제목 },
-        {...},
-        ...
-]
-
-9. /get/viewDescending
-설명 : 조회수 내림차순으로
 요청 : GET
 응답 : 
 [
         {
-                title : 글제목,
-                views : 해당 글 조회수
+                title : 제목,
+                views : 조회수,
+                date : 글쓴 날짜
+        },
+        ...
+] 
+
+8. /get/maingongji
+설명 : 최신순 공지사항 글 제목 구하기
+요청 : GET
+응답 : 
+[
+        {
+                title : 제목,
+                views : 조회수,
+                date : 글쓴 날짜
         },
         ...
 ]
+
+9. /get/mainviewdec
+설명 : QnA 글 조회수 내림차순으로
+요청 : GET
+응답 : 
+[
+        {
+                title : 제목,
+                views : 조회수,
+                date : 글쓴 날짜
+        },
+        ...
+]
+
+9. /get/hashtagrank
+설명 : 해쉬태그 순위 내림차순으로 10개만
+요청 : GET
+응답 : 
+["# 컴퓨터 공학과", "# C언어",...]

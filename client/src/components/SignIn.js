@@ -8,17 +8,9 @@ function SignIn(props){
     const onSubmitHandler = (e)=>{
         let loginData = {
             id : id,
-            password : pw
+            pw : pw
         }
         e.preventDefault();
-        const result = axiosSignInData(loginData);
-        if(result.resultData.loginSuccess){
-            alert(result.resultData.msg);
-            navigate(0);
-        }else{
-            alert(result.resultData.msg);
-        }
-        /*
         const result = axiosSignInData(loginData);
         result.then(data => {
             if(data.loginSuccess){
@@ -28,7 +20,7 @@ function SignIn(props){
                 alert(data.msg);
             }
         })
-        */
+        
     }
     return(
         <div className="modal">
@@ -36,8 +28,8 @@ function SignIn(props){
                 <span className="close" onClick={()=>{props.forClose(false)}}>x</span>
                 <form onSubmit={onSubmitHandler}>
                     <div className="modalContents">
-                        <input type="text" className="loginId" placeholder="아이디" value={id} onChange={(e)=>{setId(e.target.value)}}></input>
-                        <input type="password" className="loginPw" placeholder="비밀번호" value={pw} onChange={(e)=>{setPw(e.target.value)}}></input>
+                        <input type="text" className="loginId" placeholder="아이디" value={id} onChange={(e)=>{setId(e.target.value)}} required></input>
+                        <input type="password" className="loginPw" placeholder="비밀번호" value={pw} onChange={(e)=>{setPw(e.target.value)}} required></input>
                     </div>
                     <br/>
                     <div className="loginArea">

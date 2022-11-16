@@ -2,7 +2,12 @@ import axios from 'axios';
 function axiosGetHashTag(getTag, tag){
     /*const request = axios.get('/get/hashtag')
     .then( response =>
-        response.data)*/
+        response.data)
+    .catch(err =>{
+        alert(err.message);
+    })
+    */
+    
 
     const request = [{
         "name" : "#컴퓨터공학과" 

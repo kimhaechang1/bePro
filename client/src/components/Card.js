@@ -1,35 +1,27 @@
 import {useEffect, useState} from 'react'
-function Card(props){
-    const [글제목, set글제목] = useState("");
+import bindCardContent from '../axios/binds/bindCardContent';
+
+
+const Card = (props) => {
+    const [title, setTitle] = useState("");
+    const [contentTitle, setContentTitle] = useState([]);
     useEffect(() => {
-      set글제목(props.name)
+      setTitle(props.name);
+      const bindedMethod = bindCardContent(props.name);
+      const result = bindedMethod();
+      result.then(data=>{
+        setContentTitle(data);
+      })
       /* 백엔드 통신 */ 
       // eslint-disable-next-line default-case
-      switch(props.name){
-        case "최신 QnA":
-            break;
-        case "최근 등록된 용어":
-            break;
-        case "공지사항":
-            break;
-        case "조회수 높은 순":
-            break;    
-      }
-    })
+    },[props.name])
     return (
         <div className="card">
-          <div className="cardTitle">{글제목}</div>
+          <div className="cardTitle">{title}</div>
           <div className="cardDetail">
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
-            <div>최신 등록된 QnA입니다.</div>
+            {contentTitle.map((data, index)=>{
+              return <div key={index}>제목 : {data.title}|조회수 : {data.views}|글쓴 날짜 : { new Date(data.date).toLocaleDateString() }</div>
+            })}
           </div>
         </div>
   )
