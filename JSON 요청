@@ -29,7 +29,7 @@ pw : pw
         
 }
 
-2. /user/signout
+2. /user/signout ✅
 요청 : GET
 응답 : 
 {
