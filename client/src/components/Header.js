@@ -18,7 +18,7 @@ function Header(){
             navigate(0);
         }
     }
-    
+
 
     useEffect(() => {
         if(localStorage.getItem("token")){
@@ -29,7 +29,7 @@ function Header(){
     }, [token])
 
     const UI = {
-        loginSuccess1 : <Link to="/MyPage/*"><li>마이페이지</li></Link> ,
+        loginSuccess1 : <Link to="/MyPage/*"><li>{nick}</li></Link> ,
         loginSuccess2 : <li onClick={()=>{signOutHandler()}}>Sign Out</li>,
         SignUp : <li onClick={()=>{setSignUp(true)}}>Sign up</li>,
         SignIn : <li onClick={()=>{setSignIn(true)}}>Sign in</li>

@@ -10,6 +10,7 @@ function axiosSignInData(data){
     request.then(token => {
         if(token.loginSuccess){
             localStorage.setItem("token",JSON.stringify({value:token.cookie, nick:token.nick}))
+            window.location.reload();
         }
     })
     /*if(request.loginSuccess){

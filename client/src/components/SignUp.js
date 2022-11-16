@@ -42,31 +42,33 @@ function SignUp(props){
         if(!isDupliCheck){
             alert("아이디 중복확인 해 주세요");
             dupliInput.current.focus();
-        }
-        let SignUpData ={
-            id : id,
-            email : email,
-            pw : pw,
-            nick : nick,
-            isPro : majorInput,
-            major : major
-        }
-        e.preventDefault();
-        const result = axiosSignUpData(SignUpData);
-        console.log(result);
-        result.then(data => {
-            if(data.signUpSuccess){
-                alert(data.msg);
-                var loginData ={
-                    id : id,
-                    pw : pw,
-                }
-                axiosSignInData(loginData);
-                window.location.reload();
-            }else{
-                alert(data.msg)
+            e.preventDefault();
+            return;
+        }else{
+            let SignUpData ={
+                id : id,
+                email : email,
+                pw : pw,
+                nick : nick,
+                isPro : majorInput,
+                major : major
             }
-        })
+            e.preventDefault();
+            const result = axiosSignUpData(SignUpData);
+            console.log(result);
+            result.then(data => {
+                if(data.signUpSuccess){
+                    alert(data.msg);
+                    var loginData ={
+                        id : id,
+                        pw : pw,
+                    }
+                    axiosSignInData(loginData);
+                }else{
+                    alert(data.msg)
+                }
+            })
+        }
     }
 
     return(
@@ -82,9 +84,9 @@ function SignUp(props){
                         <input type="text" className="SignUpNick" value={nick} onChange={(e)=>{setNick(e.target.value)}} placeholder="닉네임 입력" required></input>
                         <p>전공자 인가요?</p>
                         <span>
-                            예<input className="radio" value="1" type="radio" name="jeon"onClick={()=>{setMajorInput(true)}}></input>
+                            예<input className="radio"type="radio" name="jeon"onClick={()=>{setMajorInput(true)}}></input>
                         
-                            아니오<input value="0" type="radio" name="jeon" onClick={()=>{setMajorInput(false)}} defaultChecked></input>
+                            아니오<input type="radio" name="jeon" onClick={()=>{setMajorInput(false)}} defaultChecked></input>
                         </span>
                         {majorInput ? <input type="text" className="SignUpJeon" value={major} onChange={(e)=>{setMajor(e.target.value)}} placeholder="전공입력 ex) 컴퓨터공학과" required></input> : null}
                         <button className="SignUpBtn">가입하기</button>
