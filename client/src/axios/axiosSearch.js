@@ -11,7 +11,7 @@ const axiosSearch = (inputValue, hashTags=[]) =>{
         }
         const request = axios.post('/search',data)
         .then(response => 
-            response)
+            response.data)
         .catch(err =>{
             alert(err);
         })

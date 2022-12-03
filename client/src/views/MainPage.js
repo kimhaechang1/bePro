@@ -7,6 +7,7 @@ import '../components/css/SideBar.css';
 import '../components/css/SearchDropDown.css';
 import '../components/css/HashTag.css';
 import '../components/css/SearchBox.css';
+import '../components/css/Write.css';
 import Header from '../components/Header';
 import Card from '../components/Card';
 import SideBar from '../components/SideBar';

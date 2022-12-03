@@ -20,7 +20,7 @@ const Card = (props) => {
           <div className="cardTitle">{title}</div>
           <div className="cardDetail">
             {contentTitle.map((data, index)=>{
-              return <div key={index}>제목 : {data.title}|조회수 : {data.views}|글쓴 날짜 : { new Date(data.date).toLocaleDateString() }</div>
+              return <div key={index}>제목 : {data.title}|조회수 : {data.views}|글쓴 날짜 : { data.date }</div>
             })}
           </div>
         </div>

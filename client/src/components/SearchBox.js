@@ -4,7 +4,7 @@ const SearchBox = (props) =>{
     
     const navigate = useNavigate();
     const onClickHandler = () =>{
-        navigate('/Result',{
+        navigate('/Board',{
           state:{
             content : "tt"
           }

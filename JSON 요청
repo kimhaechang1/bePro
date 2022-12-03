@@ -30,7 +30,8 @@ pw : pw
 }
 
 2. /user/signout ✅
-요청 : GET
+요청 : POST
+{ id : id }
 응답 : 
 {
         signOutSuccess : true or false,
@@ -39,12 +40,15 @@ pw : pw
 
 3. /user/signup ✅
 요청 : POST
-id : id
-email : email
-pw : pw
-nick : nick 
-isPro : true or false // 전공자 이냐 아니냐
-major : major // 전공 명
+{
+        id : id
+        email : email
+        pw : pw
+        nick : nick 
+        isPro : true or false // 전공자 이냐 아니냐
+        major : major // 전공 명
+}
+
 응답 : 
 {
         signUpSuccess : true or false,
@@ -53,7 +57,11 @@ major : major // 전공 명
 
 4. /user/idcheck ✅
 요청 : POST
-id : id
+
+{
+        id : id
+}
+
 응답 : 
 {
         idCheckSuccess : true or false,
@@ -71,8 +79,11 @@ id : id
 
 6. /search
 요청 : POST
-inputValue : inputValue
-hashTags : hashTags // Array
+{
+        inputValue : inputValue
+        hashTags : hashTags // Array
+}
+
 응답 : 
 [
         {
@@ -90,27 +101,37 @@ hashTags : hashTags // Array
 ]
 
 7. /get/mainqna
-설명 : 최신 QnA 글 제목 구하기
+설명 : 최신 QnA 글 구하기
 요청 : GET
 응답 : 
 [
         {
                 title : 제목,
+                tag : [] 태그배열,
+                id : 글쓴사람 아이디,
+                nick : 글쓴사람 닉네임,
+                context : 글 내용,
                 views : 조회수,
-                date : 글쓴 날짜
+                date : 글쓴 날짜,
+                index : 고유인덱스번호
         },
         ...
 ] 
 
 8. /get/maingongji
-설명 : 최신순 공지사항 글 제목 구하기
+설명 : 최신순 공지사항 글 구하기
 요청 : GET
 응답 : 
 [
         {
                 title : 제목,
+                tag : [] 태그배열,
+                id : 글쓴사람 아이디,
+                nick : 글쓴사람 닉네임,
+                context : 글 내용,
                 views : 조회수,
-                date : 글쓴 날짜
+                date : 글쓴 날짜,
+                index : 고유인덱스번호
         },
         ...
 ]
@@ -128,8 +149,65 @@ hashTags : hashTags // Array
         ...
 ]
 
-9. /get/hashtagrank
+10. /get/hashtagrank
 설명 : 해쉬태그 순위 내림차순으로 10개만
 요청 : GET
 응답 : 
 ["# 컴퓨터 공학과", "# C언어",...]
+
+11. /qna/post
+설명 : qna글 추가
+요청 : POST
+{
+        title : 해당 글제목,
+        tag : 해당 글 태그 배열,
+        context : 해당 글 내용,
+        date : 글쓴 날짜와 시간,
+        id : 글쓴사람 아이디,
+        nick : 글쓴사람 닉네임
+}
+응답 : 
+msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
+
+
+12. /notice/post
+설명 : 공지사항 글 추가
+요청 : POST
+{
+        title : 해당 글제목,
+        context : 해당 글 내용,
+        date : 글쓴 날짜와 시간,
+        id : 글쓴사람 아이디,
+        nick : 글쓴사람 닉네임
+}
+응답 : 
+msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
+
+13. /qna/update
+설명 : qna글 업데이트
+요청 : POST
+{
+        title : 해당 글제목,
+        tag : 해당 글 태그 배열,
+        context : 해당 글 내용,
+        date : 글쓴 날짜와 시간,
+        id : 글쓴사람 아이디,
+        nick : 글쓴사람 닉네임,
+        index : 글 고유 인덱스번호
+}
+응답 : 
+msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
+
+14. /notice/update
+설명 : 공지사항글 업데이트
+요청 : POST
+{
+        title : 해당 글제목,
+        context : 해당 글 내용,
+        date : 글쓴 날짜와 시간,
+        id : 글쓴사람 아이디,
+        nick : 글쓴사람 닉네임,
+        index : 글 고유 인덱스번호
+}
+응답 : 
+msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."

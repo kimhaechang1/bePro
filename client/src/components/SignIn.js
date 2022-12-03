@@ -13,12 +13,7 @@ function SignIn(props){
         e.preventDefault();
         const result = axiosSignInData(loginData);
         result.then(data => {
-            if(data.loginSuccess){
-                alert(data.msg);
-                navigate(0);
-            }else{
-                alert(data.msg);
-            }
+            alert(data.msg);
         })
         
     }
