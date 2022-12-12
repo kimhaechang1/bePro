@@ -1,5 +1,5 @@
 import axios from 'axios';
-const axiosGetViewTitle = () =>{
+const axiosGetViewTitle = (temp="") =>{
     const exp = [
         { 
             title : "메인페이지 조회수순1",

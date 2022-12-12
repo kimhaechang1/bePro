@@ -5,11 +5,14 @@ function SearchDropDown(props){
     const [supportData, setSupportData]= useState([]);
     useEffect(() => {
       if(props.major.length > 1){
-        //const value = hashtag;
-        const value = axiosGetHashTag(setSupportData);
-        setSupportData(value.filter((data)=>{
-            return (data.name).includes(props.major);
-        }))
+        const value = axiosGetHashTag();
+        value.then(data =>{
+          setSupportData( data.filter((
+            (bit)=>{
+              return (bit.name).includes(props.major);
+            }
+          )))
+        })
       }else{
         setSupportData([]);
       }

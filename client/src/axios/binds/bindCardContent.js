@@ -1,16 +1,21 @@
-import axiosGetQnATitle from "../axiosGetQnATitle";
 import axiosGetViewTitle from "../axiosGetViewTitle";
-import axiosGetGongjiTitle from "../axiosGetGongjiTitle";
-
-// 메인 페이지의 각각 Card.js에 들어갈 요소들을 통신 할 함수와 바인딩
-
-
+import axiosMainBoard from "../axiosMainBoard";
 const bindCardContent = (type) =>{
     const method = {
-        "최신 QnA" : axiosGetQnATitle,
-        "공지사항" : axiosGetGongjiTitle,
-        "조회수 높은 순" : axiosGetViewTitle
+        "조회수 높은 순" : "qna",
+        "최신 QnA" : "qna",
+        "공지사항" : "notice"
     }
-    return method[type];
+    if(type ==="조회수 높은 순"){
+        return {
+            boardType : method[type],
+            method : axiosGetViewTitle   
+        }
+    }else{
+        return {
+            boardType : method[type],
+            method : axiosMainBoard
+        }
+    }
 }
 export default bindCardContent;

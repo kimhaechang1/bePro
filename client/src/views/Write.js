@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import Header from "../components/Header";
 import { useState } from "react";
 import HashTag from "../components/HashTag";
@@ -15,8 +15,8 @@ const Write = (props)=>{
     useEffect(()=>{
         if(obj){
             setContentTitle(obj.title);
-            setContext(obj.context);
-            setTag(obj.tag);    
+            setContext(obj.detail);
+            setTag(obj.tags);    
         }
     },[])
     

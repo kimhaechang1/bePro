@@ -22,12 +22,14 @@ function axiosSignOut(){
         const logoutData = {
             id : clientData.id
         }
+
         const request = axios.post('/user/signout', logoutData)
         .then( response=> response.data)
         request.then(data => {
             if(data.signOutSuccess){
                 alert(data.msg);
                 localStorage.removeItem("token");
+                window.location.reload();
             }else{
                 alert(data.msg); 
             }
@@ -35,7 +37,8 @@ function axiosSignOut(){
         
     }else{
         alert("이미 로그아웃 상태 입니다.");
+        window.location.reload();
     }
-    window.location.reload();
+    
 }
 export default axiosSignOut;
