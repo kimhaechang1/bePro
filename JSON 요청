@@ -170,8 +170,7 @@ pw : pw
         board : qna or notice // qna : QnA글, notice : 공지사항 글
 }
 응답 :
-[
-     if(qna)
+if(qna)
         {
                 title : 제목,
                 id : 고유인덱스번호,
@@ -181,8 +180,19 @@ pw : pw
                 like : 좋아요 수
                 detail : 글 내용
                 tags : [] 태그배열
+                comment : [
+                        {
+                                commentDetail : 댓글 내용,
+                                commentUploadTime : 댓글 쓴 날짜,
+                                isAnony : 익 댓인지 아닌지,
+                                commentNick : 댓글 쓴 사용자 닉네임
+                                commentId : 댓글 쓴 사람 아이디
+                                commentIndex : 댓글 고유 인덱스
+                        },
+                ]
         }
-     else if(notice)
+
+else if(notice)
         {
                 title : 제목,
                 id : 고유인덱스번호,
@@ -192,7 +202,7 @@ pw : pw
                 like : 좋아요 수
                 detail : 글 내용
         }
-]
+
 
 11. /get/hashtagrank
 설명 : 해쉬태그 순위 내림차순으로 10개만
@@ -256,6 +266,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
         id : id // 현재 로그인 된 아이디 값
         index : index // 해당 글 고유 인덱스번호
         token : token // 현재 로그인 된 토큰 값
+        cate : // 인증 장소 종류, 게시판 관련이면 게시판, 댓글 관련이면 댓글
         isEdit : true or false // true 면 현재 주어진 아이디가 해당 글 고유 인덱스 번호를 통해 조회한 글쓴이 아이디와 동일한지 검사한다.
         isLogin : true or false // true 면 현재 주어진 아이디가 로그인 된 사용자인지 검사해야함. 즉, 해당 아이디에 대한 토큰이 발행되어있어야 함과 동시에 두개의 토큰값이 일치해야함
         isAdmin : true or false // true 면 현재 주어진 아이디가 해당 아이디가 어드민 권한이 있는지 검사해야함
@@ -309,3 +320,41 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
                 category : 게시판 종류
         }
 ]
+
+18. /comment/update
+설명 : 댓글 업데이트
+요청 : POST
+{
+        commentIndex : 댓글 고유 인덱스
+        commentDetail : 댓글 내용,
+}
+응답 : 
+{
+        msg : 업데이트에 성공했습니다. or 실패했습니다.
+}
+
+19. /comment/new
+설명 : 댓글 등록
+요청 : POST
+{
+        commentDetail : 댓글 내용,
+        isAnony : 익 댓인지 아닌지,
+        commentNick : 댓글 쓴 사용자 닉네임
+        commentId : 댓글 쓴 사람 아이디
+}
+응답 : 
+{
+        msg : 댓글 등록에 성공했습니다. or 실패했습니다.
+}
+
+20. /comment/delete
+설명 : 댓글 삭제
+요청 : POST
+{
+        commentIndex : 댓글 고유 인덱스,
+        commentId : 댓글 쓴사람 ID
+}
+응답 : 
+{
+        msg : 성공적으로 삭제되었습니다. or 실패했습니다.
+}
