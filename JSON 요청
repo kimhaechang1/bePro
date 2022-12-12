@@ -16,7 +16,8 @@ Id: id
 }
 -----------------------------------
 
-1. /user/signin ✅
+1. /user/signin 
+설명 : 로그인이랑 같으며, 로컬스토리지에 저장 할 유저정보를 함께 얻어옴
 요청 : POST
 id : id
 pw : pw
@@ -24,6 +25,10 @@ pw : pw
 {
         loginSuccess : true or false,
         nick : 닉네임,
+        id : 사용자 아이디,
+        email : 사용자 이메일,
+        isPro : true or false // 전공자 이냐 아니냐,
+        major : major // 전공 명,
         msg : 로그인에 성공했습니다. 비밀번호가 틀렸습니다 (비번틀렸을 시). 알 수 없는 이유로 로그인에 실패했습니다.(그 외 이유로 로그인 실패 시),
         cookie : jwt token 등등
         
@@ -68,7 +73,7 @@ pw : pw
         msg : 사용해도 좋습니다. 중복된 아이디가 존재합니다. 알 수 없는 이유로 실패했습니다.(그 외의 이유로 중복체크 실패 시)
 }
 
-5. /get/hashtag
+5. /get/hashtag ✅
 요청 : GET
 응답 : 
 [
@@ -77,7 +82,7 @@ pw : pw
 ]
 
 
-6. /search
+6. /search 
 요청 : POST
 {
         inputValue : inputValue
@@ -87,12 +92,15 @@ pw : pw
 응답 : 
 [
         {
-                post_title : 글제목,
-                post_uploader : 글쓴이,
-                post_uploadtime : 업로드 시간,
-                post_detail : 내용,
-                post_view : 조회수,
-                post_like : 추천수
+                title : 제목,
+                tags : [] 태그배열,
+                id : 고유인덱스번호,
+                uploaderNick : 글쓴사람 닉네임,
+                detail : 글 내용,
+                view : 조회수,
+                uploadtime : 글쓴 날짜,
+                like : 좋아요 수
+                category : 게시판 종류
         },
         {
                 ...
@@ -100,94 +108,131 @@ pw : pw
         ...
 ]
 
-7. /get/mainqna
-설명 : 최신 QnA 글 구하기
-요청 : GET
+7. /board/main
+설명 : 게시판에 따라 최신 10개 글 들고오기
+요청 : POST
+{
+        board:qna or notice (qna : QnA글, notice : 공지사항 글)
+}
 응답 : 
 [
         {
                 title : 제목,
-                tag : [] 태그배열,
-                id : 글쓴사람 아이디,
-                nick : 글쓴사람 닉네임,
-                context : 글 내용,
-                views : 조회수,
-                date : 글쓴 날짜,
-                index : 고유인덱스번호
+                id : 고유인덱스번호,
+                uploaderNick : 글쓴사람 닉네임,
+                view : 조회수,
+                uploadtime : 글쓴 날짜,
+                like : 좋아요 수
         },
         ...
 ] 
 
-8. /get/maingongji
-설명 : 최신순 공지사항 글 구하기
+8. /board/list
+설명 : 게시판에 따라 글목록 제공 (일단 전부, 최신순)
+요청 : POST
+{
+        board:qna or notice (qna : QnA글, notice : 공지사항 글)
+}
+응답 : 
+[
+        {
+                title : 제목,
+                id : 고유인덱스번호,
+                uploaderNick : 글쓴사람 닉네임,
+                view : 조회수,
+                uploadtime : 글쓴 날짜,
+                like : 좋아요 수
+        },
+        ...
+]
+
+9. /get/mainviewdec 
+설명 : QnA 글 조회수 내림차순으로 10개
 요청 : GET
 응답 : 
 [
         {
                 title : 제목,
-                tag : [] 태그배열,
-                id : 글쓴사람 아이디,
-                nick : 글쓴사람 닉네임,
-                context : 글 내용,
-                views : 조회수,
-                date : 글쓴 날짜,
-                index : 고유인덱스번호
+                id : 고유인덱스번호,
+                uploaderNick : 글쓴사람 닉네임,
+                view : 조회수,
+                uploadtime : 글쓴 날짜,
+                like : 좋아요 수
         },
         ...
 ]
 
-9. /get/mainviewdec
-설명 : QnA 글 조회수 내림차순으로
-요청 : GET
-응답 : 
+10. /board/view
+설명 : 게시판에 따라 상세내용 받기
+요청 : POST
+{
+        id : id, // 고유 인덱스번호
+        board : qna or notice // qna : QnA글, notice : 공지사항 글
+}
+응답 :
 [
+     if(qna)
         {
                 title : 제목,
-                views : 조회수,
-                date : 글쓴 날짜
-        },
-        ...
+                id : 고유인덱스번호,
+                uploaderNick, 글쓴사람 닉네임,
+                view : 조회수
+                uploadtime : 글쓴날짜,
+                like : 좋아요 수
+                detail : 글 내용
+                tags : [] 태그배열
+        }
+     else if(notice)
+        {
+                title : 제목,
+                id : 고유인덱스번호,
+                uploaderNick, 글쓴사람 닉네임,
+                view : 조회수
+                uploadtime : 글쓴날짜,
+                like : 좋아요 수
+                detail : 글 내용
+        }
 ]
 
-10. /get/hashtagrank
+11. /get/hashtagrank
 설명 : 해쉬태그 순위 내림차순으로 10개만
 요청 : GET
 응답 : 
 ["# 컴퓨터 공학과", "# C언어",...]
 
-11. /qna/post
+12. /qna/post
 설명 : qna글 추가
 요청 : POST
 {
         title : 해당 글제목,
         tag : 해당 글 태그 배열,
-        context : 해당 글 내용,
-        id : 글쓴사람 아이디,
+        detail : 해당 글 내용,
+        uploaderId : 글쓴사람 아이디,
 }
 응답 : 
 msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
 
 
-12. /notice/post
+13. /notice/post
 설명 : 공지사항 글 추가
 요청 : POST
 {
         title : 해당 글제목,
-        context : 해당 글 내용,
-        id : 글쓴사람 아이디,
+        detail : 해당 글 내용,
+        uploaderId : 글쓴사람 아이디,
 }
 응답 : 
 msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
 
-13. /qna/update
+14. /qna/update
 설명 : qna글 업데이트
 요청 : POST
 {
         title : 해당 글제목,
         tag : 해당 글 태그 배열,
-        context : 해당 글 내용,
-        id : 글쓴사람 아이디,
-        index : 글 고유 인덱스번호
+        detail : 해당 글 내용,
+        uploaderId : 글쓴사람 아이디,
+        id : 글 고유 인덱스번호
 }
 응답 : 
 msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
@@ -197,9 +242,70 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
 요청 : POST
 {
         title : 해당 글제목,
-        context : 해당 글 내용,
-        id : 글쓴사람 아이디,
-        index : 글 고유 인덱스번호
+        detail : 해당 글 내용,
+        uploaderId : 글쓴사람 아이디,
+        id : 글 고유 인덱스번호
 }
 응답 : 
 msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
+
+15. /auth
+설명 : 권한 검증
+요청 : POST
+{
+        id : id // 현재 로그인 된 아이디 값
+        index : index // 해당 글 고유 인덱스번호
+        token : token // 현재 로그인 된 토큰 값
+        isEdit : true or false // true 면 현재 주어진 아이디가 해당 글 고유 인덱스 번호를 통해 조회한 글쓴이 아이디와 동일한지 검사한다.
+        isLogin : true or false // true 면 현재 주어진 아이디가 로그인 된 사용자인지 검사해야함. 즉, 해당 아이디에 대한 토큰이 발행되어있어야 함과 동시에 두개의 토큰값이 일치해야함
+        isAdmin : true or false // true 면 현재 주어진 아이디가 해당 아이디가 어드민 권한이 있는지 검사해야함
+}
+응답 :
+{
+        auth : true or false // true면 access, false 면 deny
+        msg : 인증되었습니다. or 권한이 없습니다.
+}
+
+
+
+16. /mypage/userupdate
+
+설명 : 마이페이지 유저 정보 업데이트
+
+요청 : POST
+{
+        id : id
+        email : email
+        pw : pw // 공백일 경우 비밀번호 변경 X
+        nick : nick 
+        isPro : true or false // 전공자 이냐 아니냐
+        major : major // 전공 명
+}
+응답 : 
+{
+        msg : 업데이트에 성공했습니다 or 업데이트에 실패했습니다.
+}
+
+
+17. /mypage/getpostings
+
+설명 : 마이페이지 사용자 글 조회
+
+요청 : POST
+{
+        id : id // 로그인된 아이디
+}
+
+응답 : 
+[
+        {
+                title : 제목,
+                id : 고유인덱스번호,
+                view : 조회수
+                uploadtime : 글쓴날짜,
+                like : 좋아요 수,
+                detail : 글 내용,
+                tags : [] 태그배열,
+                category : 게시판 종류
+        }
+]
