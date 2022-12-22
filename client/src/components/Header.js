@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, UNSAFE_DataRouterStateContext} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import axiosSignOut from '../axios/axiosSignOut';
+import axiosAuth from '../axios/axiosAuth';
 
 function Header(){
     const navigate= useNavigate();
@@ -11,17 +12,28 @@ function Header(){
     const [signUp, setSignUp] = useState(false);
     const [nick, setNick] = useState("");
     const [token, setToken] = useState("");
-
+    const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
+    
     const signOutHandler = ()=>{
         const isLogOut = axiosSignOut();
     }
-
 
     useEffect(() => {
         if(localStorage.getItem("token")){
             const userData = JSON.parse(localStorage.getItem("token"));
             setNick(userData.nick);
             setToken(userData.value);
+            const res = axiosAuth({
+                id : userData.id,
+                token : userData.value,
+                isSignin : true,
+                isAdmin : true
+            })
+            res.then(data =>{
+                if(data.adminAuth && data.signinAuth){
+                    setIsCurrentUserAdmin(true);
+                }
+            })
         }
     }, [token])
 
@@ -39,8 +51,10 @@ function Header(){
                 <Link to="/"><div className="headerTitle">be전공자</div></Link>
                     <div className="headerTools">
                         <ul className="headerToolTitle">
-                            <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write',{state:{ type:"new", board:"qna" }}) }}>글쓰기</div>
-                            <span>|</span>
+                            {isCurrentUserAdmin ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=notice',{state:{ type:"new", board:"notice", isCurrentUserAdmin : isCurrentUserAdmin }}) }}>공지사항 글쓰기</div> : null }
+                            {isCurrentUserAdmin ? <span>|</span> : null}
+                            {token ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=qna',{state:{ type:"new", board:"qna", isCurrentUserAdmin : isCurrentUserAdmin }}) }}>글쓰기</div> : null }
+                            {token ? <span>|</span> : null}
                             <Link to="/qna"><div>글목록</div></Link>
                             <span>|</span>
                             {token ? UI['loginSuccess1'] : UI['SignIn']}

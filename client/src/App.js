@@ -17,6 +17,7 @@ import NoticeBoardList from "./views/Notice/NoticeBoardList";
 import NoticeResult from "./views/Notice/NoticeResult";
 import NoticeView from "./views/Notice/NoticeView";
 //import Notice404 from "./views/Notice/Notice404";
+import Cod404 from "./views/Cod404";
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
             <Route index element={<QnABoardList/>}/>
             <Route path=":id" element={<QnAView/>}/>
             <Route path="search" element={<QnAResult/>}/>
+            <Route path="*" element={<Cod404/>}/>
           </Route>
           <Route path="/write" element={<Write/>}/>
           <Route path="/notice" element={<NoticeBoard/>}>
@@ -36,6 +38,7 @@ function App() {
             <Route path=":id" element={<NoticeView/>}/>
             <Route path="search" element={<NoticeResult/>}/>
           </Route>
+          <Route path="*" element={<Cod404/>}/>
         </Routes>
       </div>
     </Router>

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const axiosPostUpdate = (body,board)=>{
-    const request = axios.post(`/${board}/update`)
+    const request = axios.post(`/update/${board}`,body)
     .then( response => response.data )
     .catch( err =>{
         localStorage.removeItem("post_"+body.index);

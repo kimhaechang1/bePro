@@ -16,7 +16,7 @@ Id: id
 }
 -----------------------------------
 
-1. /user/signin 
+1. /user/signin ✅
 설명 : 로그인이랑 같으며, 로컬스토리지에 저장 할 유저정보를 함께 얻어옴
 요청 : POST
 id : id
@@ -82,7 +82,7 @@ pw : pw
 ]
 
 
-6. /search 
+6. /search ✅
 요청 : POST
 {
         inputValue : inputValue
@@ -108,7 +108,7 @@ pw : pw
         ...
 ]
 
-7. /board/main
+7. /board/main ✅
 설명 : 게시판에 따라 최신 10개 글 들고오기
 요청 : POST
 {
@@ -127,7 +127,7 @@ pw : pw
         ...
 ] 
 
-8. /board/list
+8. /board/list ✅
 설명 : 게시판에 따라 글목록 제공 (일단 전부, 최신순)
 요청 : POST
 {
@@ -146,7 +146,7 @@ pw : pw
         ...
 ]
 
-9. /get/mainviewdec 
+9. /get/mainviewdec ✅
 설명 : QnA 글 조회수 내림차순으로 10개
 요청 : GET
 응답 : 
@@ -162,7 +162,7 @@ pw : pw
         ...
 ]
 
-10. /board/view
+10. /board/view ✅
 설명 : 게시판에 따라 상세내용 받기
 요청 : POST
 {
@@ -174,8 +174,9 @@ if(qna)
         {
                 title : 제목,
                 id : 고유인덱스번호,
-                uploaderNick, 글쓴사람 닉네임,
-                view : 조회수
+                uploaderNick : 글쓴사람 닉네임,
+                uploaderId : 글쓴사람 아이디,
+                view : 조회수,
                 uploadtime : 글쓴날짜,
                 like : 좋아요 수
                 detail : 글 내용
@@ -204,13 +205,13 @@ else if(notice)
         }
 
 
-11. /get/hashtagrank
+11. /get/hashtagrank ✅
 설명 : 해쉬태그 순위 내림차순으로 10개만
 요청 : GET
 응답 : 
 ["# 컴퓨터 공학과", "# C언어",...]
 
-12. /qna/post
+12. /post/qna ✅
 설명 : qna글 추가
 요청 : POST
 {
@@ -223,7 +224,7 @@ else if(notice)
 msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
 
 
-13. /notice/post
+13. /post/notice ✅
 설명 : 공지사항 글 추가
 요청 : POST
 {
@@ -234,7 +235,7 @@ msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습
 응답 : 
 msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습니다."
 
-14. /qna/update
+14. /update/qna ✅
 설명 : qna글 업데이트
 요청 : POST
 {
@@ -247,7 +248,7 @@ msg : "글이 저장되었습니다" or "오류로 인해 저장에 실패했습
 응답 : 
 msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
 
-14. /notice/update
+14. /update/notice ✅
 설명 : 공지사항글 업데이트
 요청 : POST
 {
@@ -259,27 +260,28 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
 응답 : 
 msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
 
-15. /auth
+15. /auth 
 설명 : 권한 검증
 요청 : POST
 {
         id : id // 현재 로그인 된 아이디 값
         index : index // 해당 글 고유 인덱스번호
         token : token // 현재 로그인 된 토큰 값
-        cate : // 인증 장소 종류, 게시판 관련이면 게시판, 댓글 관련이면 댓글
+        cate : post or comment // 현재 수정을 하려하는 부분이 게시판인가 댓글인가
         isEdit : true or false // true 면 현재 주어진 아이디가 해당 글 고유 인덱스 번호를 통해 조회한 글쓴이 아이디와 동일한지 검사한다.
-        isLogin : true or false // true 면 현재 주어진 아이디가 로그인 된 사용자인지 검사해야함. 즉, 해당 아이디에 대한 토큰이 발행되어있어야 함과 동시에 두개의 토큰값이 일치해야함
+        isSignin : true or false // true 면 현재 주어진 아이디가 로그인 된 사용자인지 검사해야함. 즉, 해당 아이디에 대한 토큰이 발행되어있어야 함과 동시에 두개의 토큰값이 일치해야함
         isAdmin : true or false // true 면 현재 주어진 아이디가 해당 아이디가 어드민 권한이 있는지 검사해야함
 }
 응답 :
 {
-        auth : true or false // true면 access, false 면 deny
-        msg : 인증되었습니다. or 권한이 없습니다.
+        signinAuth : true or false 실제 로그인 된 사용자인지 검증
+        editAuth : true or false // true면 로그인된 유저가 글쓴이, false면 아님
+        adminAuth : true or false // true면 admin, false면 user,
 }
 
 
 
-16. /mypage/userupdate
+16. /user/userupdate
 
 설명 : 마이페이지 유저 정보 업데이트
 
@@ -298,7 +300,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
 }
 
 
-17. /mypage/getpostings
+17. /user/getpostings
 
 설명 : 마이페이지 사용자 글 조회
 
@@ -337,6 +339,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
 설명 : 댓글 등록
 요청 : POST
 {
+        id : 글 고유 인덱스
         commentDetail : 댓글 내용,
         isAnony : 익 댓인지 아닌지,
         commentNick : 댓글 쓴 사용자 닉네임

@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const axiosPost = (post,board) =>{
-    const request = axios.post(`/${board}/post`)
+    const request = axios.post(`/post/${board}`,post)
     .then( response => response.data )
     .catch(err =>{
         if(!localStorage.getItem("post_1")){

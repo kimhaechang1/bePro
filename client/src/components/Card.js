@@ -24,7 +24,6 @@ const Card = (props) => {
       const obj = bindCardContent(props.name);
       setBoardType(obj.boardType);
       const method =obj.method;
-      console.log(method);
       method(obj.boardType)
       .then( data =>{
           setContentTitle(data);
