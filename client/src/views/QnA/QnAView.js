@@ -136,9 +136,9 @@ const QnAView = () =>{
                     
                 </div>
             </div>
-            {content.comment ? <div className="commentArea">
-               { (content.comment).map((value) => {return <Comment commentData={value} admin={isCurrentUserAdmin} />}) }
-            </div> : null}
+            {content.comment ? 
+                (content.comment).map((value) => {return <Comment commentData={value} admin={isCurrentUserAdmin} />}) 
+           : null}
         </div>
     )
 }

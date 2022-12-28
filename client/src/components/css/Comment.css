@@ -1,4 +1,8 @@
-div.commentBox{
+div.commentArea{
+    display: flex;
+    justify-content: center;
+}
+div.commentFrame{
     border-radius: 10px;
     border : 1px solid gray;
     padding: 10px;
@@ -11,7 +15,7 @@ div.commentTitle{
     flex-direction: row;
     justify-content: space-between;
 }
-div.commentBox textarea{
+div.commentFrame textarea{
     width:100%;
 }
 
