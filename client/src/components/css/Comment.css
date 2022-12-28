@@ -1,0 +1,17 @@
+div.commentBox{
+    border-radius: 10px;
+    border : 1px solid gray;
+    padding: 10px;
+    margin-bottom: 10px;
+    max-width: 625px;
+    width: 625px;
+}
+div.commentTitle{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+div.commentBox textarea{
+    width:100%;
+}
+

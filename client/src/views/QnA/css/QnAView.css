@@ -1,0 +1,32 @@
+div.tagArea{
+    display:flex;
+    flex-direction:row;
+    gap: 10px;
+}
+div.commentArea{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+    padding : 10px 5px;
+}
+div.commentWriteArea{
+    display:flex;
+    justify-content: center;
+}
+div.commentWriteFrame{
+    border-radius : 10px;
+    border : 1px solid gray;
+    padding : 10px;
+    margin-bottom : 20px;
+    max-width: 625px;
+    width: 625px;
+}
+div.commentWriteContent textarea{
+    width:100%;
+}
+div.commentWriteContent{
+    display: flex;  
+}
+div.commentWriteContent button{
+    width: fit-content;
+}

@@ -8,7 +8,6 @@ import axios from "axios"
  *  @param {boolean} isAdmin 어드민 인증 필요여부
  *  @param {boolean} isEdit 수정가능 여부
  *  @param {boolean} isSignin 실제 로그인 되어있는지 검사 여부
- * }
  */
 const axiosAuth = (option) =>{
     const res = axios.post('/auth',option)

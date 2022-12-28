@@ -260,7 +260,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
 응답 : 
 msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습니다."
 
-15. /auth 
+15. /auth ✅
 설명 : 권한 검증
 요청 : POST
 {
@@ -323,7 +323,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
         }
 ]
 
-18. /comment/update
+18. /comment/update ✅
 설명 : 댓글 업데이트
 요청 : POST
 {
@@ -335,7 +335,7 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
         msg : 업데이트에 성공했습니다. or 실패했습니다.
 }
 
-19. /comment/new
+19. /comment/new ✅
 설명 : 댓글 등록
 요청 : POST
 {
@@ -350,12 +350,11 @@ msg : "글이 수정되었습니다" or "오류로 인해 수정에 실패했습
         msg : 댓글 등록에 성공했습니다. or 실패했습니다.
 }
 
-20. /comment/delete
+20. /comment/delete ✅
 설명 : 댓글 삭제
 요청 : POST
 {
-        commentIndex : 댓글 고유 인덱스,
-        commentId : 댓글 쓴사람 ID
+        commentIndex : 댓글 고유 인덱스
 }
 응답 : 
 {

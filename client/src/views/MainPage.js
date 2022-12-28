@@ -14,7 +14,6 @@ import SideBar from '../components/SideBar';
 import SearchDropDown from '../components/SearchDropDown';
 import HashTag from '../components/HashTag';
 import SearchBox from '../components/SearchBox';
-import axiosSearch from '../axios/axiosSearch';
 import {useState} from 'react';
 
 function MainPage(){
