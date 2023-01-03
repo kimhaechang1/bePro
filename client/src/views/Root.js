@@ -1,12 +1,12 @@
 import { Outlet } from "react-router-dom";
-import "./css/QnAView.css";
+import Header from "../components/Header";
 
-const QnABoard = () =>{
+const Root = () =>{
     return(
         <>
+            <Header/>
             <Outlet/>
         </>
     )
 }
-
-export default QnABoard;
+export default Root;

@@ -1,4 +1,7 @@
 div.dropDownBox{
+    width: 175px;
+    position: absolute;
+    z-index: 100;
     display:flex;
     flex-direction: column;
     background-color: white;
@@ -6,6 +9,8 @@ div.dropDownBox{
     border-top: none;
     border-bottom: none;
 }
-div.elementFrame{
+div.dropDownElement{
+    cursor: pointer;
+    padding: 3px;
     border-bottom: 1px solid black;
 }

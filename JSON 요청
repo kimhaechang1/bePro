@@ -82,7 +82,7 @@ pw : pw
 ]
 
 
-6. /search ✅
+6. /post/searchquery ✅
 요청 : POST
 {
         inputValue : inputValue

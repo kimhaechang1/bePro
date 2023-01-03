@@ -1,0 +1,17 @@
+.searchBoxFrame{
+    position: absolute;
+    left: -25%;
+    z-index: 100;
+    padding: 5px;
+    border-radius:10px;
+    width: fit-content;
+    background-color: chartreuse;
+}
+.searchBoxSubmit{
+    width:fit-content;
+    height: fit-content;
+}
+.searchBox{
+    display: flex;
+    flex-direction: row;
+}

@@ -1,10 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {Link, UNSAFE_DataRouterStateContext} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import SignIn from './SignIn';
 import SignUp from './SignUp';
 import axiosSignOut from '../axios/axiosSignOut';
 import axiosAuth from '../axios/axiosAuth';
+import SearchBox from './SearchBox';
 
 function Header(){
     const navigate= useNavigate();
@@ -13,9 +14,11 @@ function Header(){
     const [nick, setNick] = useState("");
     const [token, setToken] = useState("");
     const [isCurrentUserAdmin, setIsCurrentUserAdmin] = useState(false);
-    
+    const [searchBoxToggle, setSearchBoxToggle] = useState(false);
+
+
     const signOutHandler = ()=>{
-        const isLogOut = axiosSignOut();
+        axiosSignOut();
     }
 
     useEffect(() => {
@@ -45,15 +48,20 @@ function Header(){
     }
 
     return(
+        <>
         <div className="area">
             <div className="innerArea">
                 <div className="contentArea">
                 <Link to="/"><div className="headerTitle">be전공자</div></Link>
                     <div className="headerTools">
                         <ul className="headerToolTitle">
-                            {isCurrentUserAdmin ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=notice',{state:{ type:"new", board:"notice", isCurrentUserAdmin : isCurrentUserAdmin }}) }}>공지사항 글쓰기</div> : null }
+                            <div>
+                                <img onClick={()=>{ {searchBoxToggle ? setSearchBoxToggle(false) : setSearchBoxToggle(true)}}} src={`${process.env.PUBLIC_URL}/search.svg`}/>
+                                {searchBoxToggle ? <SearchBox/> : null}
+                            </div>
+                            {isCurrentUserAdmin ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=notice&type=new',{state:{ isCurrentUserAdmin : isCurrentUserAdmin }}) }}>공지사항 글쓰기</div> : null }
                             {isCurrentUserAdmin ? <span>|</span> : null}
-                            {token ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=qna',{state:{ type:"new", board:"qna", isCurrentUserAdmin : isCurrentUserAdmin }}) }}>글쓰기</div> : null }
+                            {token ? <div style={{cursor:"pointer"}} onClick={()=>{ navigate('/write?board=qna&type=new',{state:{ isCurrentUserAdmin : isCurrentUserAdmin }}) }}>글쓰기</div> : null }
                             {token ? <span>|</span> : null}
                             <Link to="/qna"><div>글목록</div></Link>
                             <span>|</span>
@@ -67,6 +75,8 @@ function Header(){
                 </div>
             </div>
         </div>
+        
+        </>
     )
 }
 

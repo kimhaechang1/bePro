@@ -1,6 +1,5 @@
 import { useEffect } from "react";
-import { Navigate, useLocation, useNavigate, useSearchParams } from "react-router-dom";
-import Header from "../components/Header";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { useState } from "react";
 import HashTag from "../components/HashTag";
 import axiosPost from "../axios/axiosPost";
@@ -13,9 +12,13 @@ const Write = (props)=>{
     const [context, setContext] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
     const [title, setTitle] = useState("");
+    const [type, setType] = useState("");
+    const [board, setBoard] = useState("");
+
     const [searchParams] = useSearchParams();
     const location = useLocation();
     const navigate = useNavigate();
+
     const obj = location.state.data;
 
     useEffect(()=>{
@@ -23,23 +26,30 @@ const Write = (props)=>{
             alert("로그아웃 상태입니다.");
             return navigate(-1);
         }
-        setIsAdmin(location.state.isCurrentUserAdmin);
-        if(obj){
-            setContentTitle(obj.title);
-            setContext(obj.detail);
-            setTag(obj.tags);
-        }
-        if(!location.state.isCurrentUserAdmin && location.state.board==="notice"){
+        if(!location.state.isCurrentUserAdmin && searchParams.get("board")==="notice"){
             alert("권한이 없습니다.");
             return navigate(-1);
         }
+        setIsAdmin(location.state.isCurrentUserAdmin);
+        setType(searchParams.get("type"));
+        setBoard(searchParams.get("board"));
+        if(searchParams.get("type")==="edit"){
+            setContentTitle(obj.title);
+            setContext(obj.detail);
+            setTag(obj.tags);
+        }else if(searchParams.get("type")==="new"){
+            setContentTitle("");
+            setContext("");
+            setTag([]);
+        }
         if(searchParams.get("board")==="notice"){
             setTitle("공지사항");
+            
         }else if(searchParams.get("board")==="qna"){
             setTitle("QnA");
         }
         // 게시판 늘어날때 추가 해야 할 부분 : 게시판 제목
-    },[searchParams.get("board")])
+    },[searchParams, obj,location.state.isCurrentUserAdmin])
     
     
     const onEnterKeyUpHandler = (e)=>{
@@ -60,6 +70,7 @@ const Write = (props)=>{
         if(!JSON.parse(localStorage.getItem("token"))){
             return alert("로그아웃 상태입니다.");
         }
+        let resMsg = null;
         const userToken = JSON.parse(localStorage.getItem("token"));
         const body = {
             "title" : contentTitle,
@@ -67,8 +78,8 @@ const Write = (props)=>{
             "detail" : context,
             "uploaderId" : userToken.id
         }
-        if(location.state.board ==="qna"){
-            if(location.state.type ==="edit"){
+        if(board ==="qna" && type ==="edit"){
+            if(!isAdmin){
                 const auth = axiosAuth({
                     id : userToken.id,
                     token : userToken.value,
@@ -76,67 +87,42 @@ const Write = (props)=>{
                     isSignin : true,
                     cate : "post",
                     isEdit : true
-                })       
+                })
                 auth.then(data =>{
-                    if(data.signinAuth && data.editAuth){
-                        body['id'] = obj.id;
-                        const resQnAEdit = axiosPostUpdate(body, location.state.board);
-                        resQnAEdit.then(data =>{
-                            alert(data.msg);
-                        })
-                    }else{
-                        alert("권한이 없습니다.");
-                        return navigate(-1);
-                    }
+                    if(!data.signinAuth || !data.editAuth){
+                        return alert("권한이 없습니다.");
+                    }        
                 })
             }
-            else if(location.state.type==="new"){
-                const resQnANew = axiosPost(body, location.state.board);
-                resQnANew.then(data=>{
-                    alert(data.msg);
-                })
-            }
-        /*const userId = JSON.parse(localStorage.getItem("token")).id;
-        
-        if(location.state.type==="edit"){
             body['id'] = obj.id;
-            const resEdit = axiosPostUpdate(body,location.state.board);
-            resEdit.then(data => {
-                alert(data.msg);
-            })
-        }else if(location.state.type==="new"){
-            console.log(body);
-            const resNew = axiosPost(body,location.state.board);
+            const resQnAEdit = axiosPostUpdate(body, board);
+            resMsg = resQnAEdit;
             
-            resNew.then( data => {
-                console.log(data.err);
-                alert(data.msg);
-            })  
-        }*/
-        }else if(location.state.board ==="notice"){
+        }else if(board ==="qna" && type ==="edit"){
+            const resQnANew = axiosPost(body, board);
+            resMsg = resQnANew;
+        }else if(board ==="notice"){
             if(!isAdmin){
                 return alert("권한이 없습니다.");
-            }else{
-                if(location.state.type ==="edit"){
-                    body['id'] = obj.id;
-                    const resNotiEdit = axiosPostUpdate(body, location.state.board);
-                    resNotiEdit.then(data =>{
-                        alert(data.msg);
-                    })
-                }else if(location.state.type ==="new"){
-                    const resNotiNew = axiosPost(body, location.state.board);
-                    resNotiNew.then(data =>{
-                        alert(data.msg);
-                    })
-                }
+            }
+            if(type ==="edit"){
+                body['id'] = obj.id;
+                const resNotiEdit = axiosPostUpdate(body, board);
+                resMsg = resNotiEdit;
+            }else if(type ==="new"){
+                const resNotiNew = axiosPost(body, board);
+                resMsg = resNotiNew;
             }
         }
+        resMsg.then(data=>{
+            alert(data.msg);
+            navigate(`/qna/${obj.id}`);
+        })
     }
 
 
     return(
         <div className="App">
-        <Header/>
         <div className="mainContentFrame">
           <div className="innerArea border">
             <div className="contentFrame writeFrame">
@@ -162,7 +148,7 @@ const Write = (props)=>{
                     <div>
                         <input onClick={onClickHandler} value="submit" type="submit"/>
                         
-                        {obj ? <div>{obj.id}</div> : null}
+                        {location.state.data ? <div>{location.state.data.id}</div> : null}
                     </div>
             </div>
           </div>

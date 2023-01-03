@@ -7,7 +7,6 @@ import Comment from '../../components/Comment';
 import './css/QnAView.css';
 import axiosComment from '../../axios/axiosComment';
 
-
 const QnAView = () =>{
     const location = useLocation();
     const navigate = useNavigate();
@@ -46,13 +45,13 @@ const QnAView = () =>{
                 isAdmin : true
             })
             resOfAuth.then(data =>{
-                if(data.adminAuth && data.signinAuth){
-                    setIsEditable(true);
-                    setIsCurrentUserAdmin(true);
-                    
-                }else if(data.signinAuth){
+                if(data.signinAuth){
                     setIsAnony(false);
                     setIsInputAnonyActive(true);
+                    if(data.adminAuth){
+                        setIsEditable(true);
+                        setIsCurrentUserAdmin(true);
+                    }
                 }else{
                     setIsAnony(true);
                     setIsInputAnonyActive(false);
@@ -64,11 +63,9 @@ const QnAView = () =>{
     
 
     const onClickHandler = () =>{
-        navigate("/write?board=qna", {
-            state : {
-                type : "edit",
+        navigate('/write?board=qna&type=edit', {
+            state:{
                 data : content,
-                board : "qna",
                 isCurrentUserAdmin : isCurrentUserAdmin
             }
         })

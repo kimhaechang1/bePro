@@ -39,7 +39,6 @@ div.innerArea{
     margin-left:auto;
 }
 div.contentArea{
-    position: relative;
     display: flex;
     align-items: center;
     margin: 0 -0.25rem;
@@ -68,6 +67,7 @@ div.headerTools{
     padding-bottom: 14px;
 }
 ul.headerToolTitle{
+    position: relative;
     font-family: "MapleFont";
     color:rgb(117, 90, 143);
     letter-spacing: 1px;
@@ -86,18 +86,7 @@ ul.headerToolTitle li:hover{
     text-shadow: 0 0 2px #fff, 0 0 4px #fff, 
         0 0 6px #f7a6f0, 0 0 8px #fa74ff;
 }
-div.searchIcon{
-    margin-right: 10px;
-    cursor: pointer;
-}
-div.searchArea{
-    display: flex;
-    flex-direction: column;
-}
-div.searchFrame{
-    display:flex;
-    flex-direction: row;
-}
+
 /* title 
 h1.title { position: relative; }
 

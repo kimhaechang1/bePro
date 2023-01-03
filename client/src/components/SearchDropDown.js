@@ -4,12 +4,12 @@ import axiosGetHashTag from '../axios/axiosGetHashTag';
 function SearchDropDown(props){
     const [supportData, setSupportData]= useState([]);
     useEffect(() => {
-      if(props.major.length > 1){
-        const value = axiosGetHashTag();
+      const value = axiosGetHashTag();
+      if(props.inputValue.length > 1){  
         value.then(data =>{
           setSupportData( data.filter((
             (bit)=>{
-              return (bit.name).includes(props.major);
+              return (bit.name).includes(props.inputValue);
             }
           )))
         })
@@ -29,7 +29,7 @@ function SearchDropDown(props){
         <div key={"dropdown"} className="dropDownBox">
             {supportData.map((data, index)=>{
                 return(
-                    <div key={data.name} onClick={onClickHandler} style={{borderBottom:"1px solid black", cursor:"pointer"}} >{data.name}</div>
+                    <div className="dropDownElement" key={data.name} onClick={onClickHandler}>{data.name}</div>
                 )
             })}
         </div>
