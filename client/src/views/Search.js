@@ -13,7 +13,7 @@ const Search = () =>{
         let noti = [];
         let tags = [];
         const q = searchParams.get("q");
-        if(searchParams.get("tags")>1){
+        if(searchParams.get("tags").length>1){
             tags = [...searchParams.get("tags").split(",")];
         }
         const res = axiosSearch(q, tags);
