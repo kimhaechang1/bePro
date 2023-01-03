@@ -37,7 +37,7 @@ const Search = () =>{
           <div className="contentFrame">
             <SideBar name={"# 실시간 태그순위"}/>
             <div className="cardFrame">
-              <div className="subject">총 {resOfQna.length+resOfNoti} 건</div>
+              <div className="subject">총 {resOfQna.length+resOfNoti.length} 건</div>
               <div className="cardArea">
                 <Card name={"QnA 검색결과"} data={resOfQna} referrer={"search"}/>
               </div>
