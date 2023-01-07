@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import axiosSearch from "../axios/axiosSearch";
 import Card from "../components/Card";
 import SideBar from "../components/SideBar";
@@ -8,6 +8,7 @@ const Search = () =>{
     const [searchParams] = useSearchParams();
     const [resOfQna, setResOfQna] = useState([]);
     const [resOfNoti, setResOfNoti] = useState([]);
+    const navigate = useNavigate();
     useEffect(()=>{
         let qna = [];
         let noti = [];
@@ -17,6 +18,9 @@ const Search = () =>{
             tags = [...searchParams.get("tags").split(",")];
         }
         const res = axiosSearch(q, tags);
+        if(!res){
+            return;
+        }
         res.then(data=>{
             data.map((context)=>{
                 if(context.category ==="qna"){

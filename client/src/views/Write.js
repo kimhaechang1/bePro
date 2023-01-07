@@ -8,35 +8,35 @@ import axiosAuth from "../axios/axiosAuth";
 
 const Write = (props)=>{
     const [contentTitle, setContentTitle] = useState("");
+    const [allData, setAllData] = useState({});
+
     const [tag, setTag] = useState([]);
     const [context, setContext] = useState("");
     const [isAdmin, setIsAdmin] = useState(false);
     const [title, setTitle] = useState("");
     const [type, setType] = useState("");
     const [board, setBoard] = useState("");
-
+    
     const [searchParams] = useSearchParams();
     const location = useLocation();
     const navigate = useNavigate();
 
-    const obj = location.state.data;
-
     useEffect(()=>{
-        if(!JSON.parse(localStorage.getItem("token"))){
-            alert("로그아웃 상태입니다.");
-            return navigate(-1);
-        }
-        if(!location.state.isCurrentUserAdmin && searchParams.get("board")==="notice"){
+        if(!JSON.parse(localStorage.getItem("token"))||(!location.state.isCurrentUserAdmin && searchParams.get("board")==="notice") || !location.state){
             alert("권한이 없습니다.");
             return navigate(-1);
         }
-        setIsAdmin(location.state.isCurrentUserAdmin);
+        const locData = location.state.data;
+        const isCurUserAdmin = location.state.isCurrentUserAdmin;
+        setAllData(locData);
+        setIsAdmin(isCurUserAdmin);
         setType(searchParams.get("type"));
         setBoard(searchParams.get("board"));
+
         if(searchParams.get("type")==="edit"){
-            setContentTitle(obj.title);
-            setContext(obj.detail);
-            setTag(obj.tags);
+            setContentTitle(locData.title);
+            setContext(locData.detail);
+            setTag(locData.tags);
         }else if(searchParams.get("type")==="new"){
             setContentTitle("");
             setContext("");
@@ -49,7 +49,7 @@ const Write = (props)=>{
             setTitle("QnA");
         }
         // 게시판 늘어날때 추가 해야 할 부분 : 게시판 제목
-    },[searchParams, obj,location.state.isCurrentUserAdmin])
+    },[searchParams, location.state])
     
     
     const onEnterKeyUpHandler = (e)=>{
@@ -83,7 +83,7 @@ const Write = (props)=>{
                 const auth = axiosAuth({
                     id : userToken.id,
                     token : userToken.value,
-                    index : obj.id,
+                    index : allData.id,
                     isSignin : true,
                     cate : "post",
                     isEdit : true
@@ -94,11 +94,11 @@ const Write = (props)=>{
                     }        
                 })
             }
-            body['id'] = obj.id;
+            body['id'] = allData.id;
             const resQnAEdit = axiosPostUpdate(body, board);
             resMsg = resQnAEdit;
             
-        }else if(board ==="qna" && type ==="edit"){
+        }else if(board ==="qna" && type ==="new"){
             const resQnANew = axiosPost(body, board);
             resMsg = resQnANew;
         }else if(board ==="notice"){
@@ -106,7 +106,7 @@ const Write = (props)=>{
                 return alert("권한이 없습니다.");
             }
             if(type ==="edit"){
-                body['id'] = obj.id;
+                body['id'] = allData.id;
                 const resNotiEdit = axiosPostUpdate(body, board);
                 resMsg = resNotiEdit;
             }else if(type ==="new"){
@@ -116,7 +116,12 @@ const Write = (props)=>{
         }
         resMsg.then(data=>{
             alert(data.msg);
-            navigate(`/qna/${obj.id}`);
+            if(type==="edit"){
+                navigate(`/${board}/${allData.id}`);
+            }else{
+                navigate(`/${board}`);
+            }
+            
         })
     }
 
@@ -147,8 +152,6 @@ const Write = (props)=>{
                     </div>
                     <div>
                         <input onClick={onClickHandler} value="submit" type="submit"/>
-                        
-                        {location.state.data ? <div>{location.state.data.id}</div> : null}
                     </div>
             </div>
           </div>

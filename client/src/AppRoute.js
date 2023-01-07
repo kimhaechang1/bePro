@@ -6,7 +6,7 @@ import {
 
 import Root from "./views/Root";
 import MainPage from './views/MainPage';
-import MyPage from './views/MyPage';
+import MyPage from './views/Mypage/MyPage';
 import Write from './views/Write';
 import QnABoard from "./views/QnA/QnABoard";
 import QnABoardList from "./views/QnA/QnABoardList";
@@ -16,15 +16,22 @@ import NoticeBoardList from "./views/Notice/NoticeBoardList";
 import NoticeView from "./views/Notice/NoticeView";
 import Cod404 from "./views/Cod404";
 import Search from "./views/Search";
+import EditProfile from "./views/Mypage/EditProfile";
+import Manage from "./views/Mypage/Manage";
 
-function App() {
+function AppRoute() {
   return (
     <Router>
       <div>
         <Routes>
           <Route path="/" element={<Root/>}>
             <Route index element={<MainPage/>}/>
-            <Route path="/mypage/*" element={<MyPage/>}/>
+            <Route path="/mypage/" element={<MyPage/>}>
+              <Route index element={<Cod404/>}/>
+              <Route path="edit_profile" element={<EditProfile/>}/>
+              <Route path="manage" element={<Manage/>}/>
+              <Route path="*" element={<Cod404/>}/>
+            </Route>
             <Route path="/qna" element={<QnABoard/>}>
               <Route index element={<QnABoardList/>}/>
               <Route path=":id" element={<QnAView/>}/>
@@ -44,5 +51,5 @@ function App() {
   );
 }
 
-export default App;
+export default AppRoute;
 

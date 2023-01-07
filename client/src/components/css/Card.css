@@ -38,6 +38,10 @@ div.cardDetail{
     flex-wrap: wrap;
     flex-direction: column;
 }
+div.cardElement{
+    display: flex;
+    flex-direction: row;
+}
 div.cardContentTitle{
     margin-right: 0;
     width: fit-content;

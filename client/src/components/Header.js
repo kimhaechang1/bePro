@@ -41,7 +41,7 @@ function Header(){
     }, [token])
 
     const UI = {
-        loginSuccess1 : <Link to="/mypage/*"><li>{nick}</li></Link> ,
+        loginSuccess1 : <Link to="/mypage/manage"><li>{nick}</li></Link> ,
         loginSuccess2 : <li onClick={()=>{signOutHandler()}}>Sign Out</li>,
         SignUp : <li onClick={()=>{setSignUp(true)}}>Sign up</li>,
         SignIn : <li onClick={()=>{setSignIn(true)}}>Sign in</li>

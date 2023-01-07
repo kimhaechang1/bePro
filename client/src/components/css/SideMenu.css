@@ -1,0 +1,29 @@
+.sideMenuFrame{
+    width: 15%;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px, rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+    height: fit-content;
+    border-radius: 5px;
+}
+.sideMenuElement{
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+    padding: 10px 10px;
+}
+.sideMenuElementInside{
+    padding: 5px 15px;
+    border-radius: 10px;
+}
+.currentSelected{
+    background-color: rgba(0,0,0,0.05);
+}
+.sideMenuElementInside:hover{
+    background-color: rgba(0,0,0,0.05);
+}
+.lastElement{
+    border: none;
+}
+.lastElement:hover::after{
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 5px;
+}
