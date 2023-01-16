@@ -1,3 +1,5 @@
+import '../components/css/HashTag.css';
+
 function HashTag(props){
     const onClickHandler = ()=>{
         const copy = [...props.forDelTag];

@@ -39,3 +39,8 @@ div.tagArea{
     flex-direction:row;
     gap: 10px;
 }
+
+div.PageArea{
+    display: flex;
+    justify-content: center;
+}

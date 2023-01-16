@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router-dom';
 import bindCardContent from '../axios/binds/bindCardContent';
+import '../components/css/Card.css';
 
 const Card = (props) => {
     const [title, setTitle] = useState("");
@@ -20,7 +21,7 @@ const Card = (props) => {
         })
       }else{
         if(props.referrer==="search"){
-          setTitle(`${props.name} ${props.data.length} 건`);
+          setTitle(`${props.name} ${props.total} 건`);
         }
         setContent(props.data);
       }
@@ -29,7 +30,7 @@ const Card = (props) => {
 
     const onLinkHandler = (e) =>{
       if(e.target.innerHTML !== "조회수 높은 순"){
-        navigate(`/${boardType}`);
+        navigate(`/${boardType}?page=1`);
       }
     }
 

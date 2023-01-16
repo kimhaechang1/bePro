@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import bindSideBarContent from "../axios/binds/bindSideBarContent";
+import '../components/css/SideBar.css';
 
 function SideBar(props){
     const [content, setContent] = useState([]);

@@ -1,9 +1,8 @@
 import {useState, useEffect} from 'react';
-import {useNavigate} from 'react-router-dom';
 import axiosSignUpData from '../axios/axiosSignUpData';
 import axiosSignInData from '../axios/axiosSignInData';
 import axiosIdDuplicateCheck from '../axios/axiosIdDuplicateCheck';
-import SignIn from './SignIn';
+import '../components/css/SignUp.css';
 
 function SignUp(props){
     

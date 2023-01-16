@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { useNavigate} from "react-router-dom";
-import axiosSearch from "../axios/axiosSearch";
+import '../components/css/SearchBox.css';
 import SearchDropDown from "./SearchDropDown";
 import HashTag from "./HashTag";
+
 const SearchBox = (props) =>{
     const [value, setValue] = useState("");
     const [hashTag, setHashTag] = useState([]);
 
     const navigate = useNavigate();
     const onClickHandler = () =>{
-        navigate(`/search?q=${value}&tags=${hashTag.join(',')}`);
+        navigate(`/search?q=${value}&tags=${hashTag.join(',')}&qna_page=1&notice_page=1`);
     }
 
     return(

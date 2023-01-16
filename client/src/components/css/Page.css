@@ -1,0 +1,20 @@
+.PageFrame{
+    max-width: 500px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 30px;
+}
+.PageList{
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    
+}
+.PageEle.selected{
+    color: green;
+}
+
+.onCursor{
+    cursor: pointer;
+}

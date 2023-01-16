@@ -1,10 +1,8 @@
-import axios from 'axios';
 import {useEffect, useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import axiosSignInData from '../axios/axiosSignInData';
-import axiosSignOut from '../axios/axiosSignOut';
 import axiosSignUpdate from '../axios/axiosSignUpdate';
-
+import '../components/css/SignIn.css';
 
 function SignIn(props){
 

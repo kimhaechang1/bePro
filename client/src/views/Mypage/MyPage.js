@@ -34,11 +34,11 @@ function MyPage(){
     },[])
 
     return(
-        <div className="App">
+      <div className="App">
         <div className="mainContentFrame">
           <div className="innerArea border">
             <div className="contentFrame">
-                <SideMenu menuList={menuList} current={currentSelected}/>
+                <SideMenu isCurrentUserAdmin={isCurrentUserAdmin} menuList={menuList} current={currentSelected}/>
                 <Outlet context={{setCurrentSelected, isCurrentUserAdmin, userAuth}}/>
             </div>
           </div>

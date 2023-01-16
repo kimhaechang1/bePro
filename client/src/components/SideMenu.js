@@ -17,7 +17,7 @@ const SideMenu = (props) =>{
                 return(
                     <div className="sideMenuElement" key={data.menu_value}>
                         <div onClick={()=>{
-                            navigate(`/mypage/${data.menu_value}`);
+                            navigate(`/mypage/${data.menu_value}${data.menu_value==="manage" ? "?qna_page=1":''}${props.isCurrentUserAdmin && data.menu_value==="manage" ? "&notice_page=1" : '' }`);
                         }} className={props.current === data.menu_value ? "sideMenuElementInside currentSelected" : "sideMenuElementInside"}>{data.render}</div>
                     </div>
                 )    

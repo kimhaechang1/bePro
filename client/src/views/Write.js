@@ -5,6 +5,7 @@ import HashTag from "../components/HashTag";
 import axiosPost from "../axios/axiosPost";
 import axiosPostUpdate from "../axios/axiosPostUpdate";
 import axiosAuth from "../axios/axiosAuth";
+import './css/Write.css';
 
 const Write = (props)=>{
     const [contentTitle, setContentTitle] = useState("");

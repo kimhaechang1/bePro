@@ -110,7 +110,6 @@ const QnAView = () =>{
             <div>글쓴이 아이디 : { content.uploaderId ? content.uploaderId.slice(0,Math.ceil(content.uploaderId.length/2))+
             "*".repeat(content.uploaderId.length - Math.ceil(content.uploaderId.length/2)) : content.uploaderId}</div>
             <div>조회수 : {content.view}</div>
-            <div>좋아요 : {content.like}</div>
             <hr/>
             <div>isInputAnonyActive : {isInputAnonyActive ? "true" : "false"}</div>
             <div>isAnony : {isAnony ? "true" : "false"}</div>
