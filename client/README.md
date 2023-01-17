@@ -6,6 +6,8 @@ React.js 기반으로 제작된 클라이언트
 
 맡은 임무 : 리액트를 활용한 컴포넌트 제작 및 기능 구현
 
+<a href="https://github.com/kimhaechang1/DevLog/tree/main/bePro">bePro devlog</a>
+
 ## 사용한 라이브러리들
 ```
 "axios": "^1.1.3",
@@ -109,6 +111,105 @@ React.js 기반으로 제작된 클라이언트
 
 ```"/search"``` :
 
-- 검색결과 페이지로서, 검색 API 호출의 결과물을 게시판별로 나누어 렌더링한다.
+- 검색결과 페이지로서, 쿼리스트링의 값으로 검색 API를 호출하여 게시판 별 검색결과를 렌더링 한다.
 
 - 기본적으로 글 제목들을 게시판별로 보여주며, 클릭 할 시 글 상세보기 페이지로 이동하게 된다.
+
+## 주요 컴포넌트
+
+### Card.js
+
+<a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/components/Card.js">소스코드 링크</a>
+
+- 현재 메인 페이지, 쓴글 관리 페이지, 검색결과 페이지에서 글 목록을 렌더링 해 주는 역할을 수행
+
+- <a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/axios/binds/bindCardContent.js">bindCardContent</a> 를 통해 상황에 맞는 게시판 종류와 데이터 통신이 따로 필요한 경우 함수를 함께 리턴 받아서 수행
+- Card.js 에서 직접 서버와 통신하지 않는 상황에서는 ```props.data```를 통해 데이터를 넘겨받음
+
+- 글 목록에 있는 제목을 누를시 ```bindCardContent```를 통해 얻은 게시판 정보와 글 데이터를 통해 상세보기 페이지로 ```navigate```함
+
+---
+
+#### Devlog
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog01.md">초창기 Card.js</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog12.md">초창기(메인페이지용) Card.js 로직 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog18.md">검색결과 페이지용 Card.js 확장</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog19.md">쓴글 관리 페이지용 Card.js 확장</a>
+
+---
+
+### SearchBox.js - SearchDropDown.js - HashTag.js
+
+<a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/components/SearchBox.js">SearchBox 소스코드</a>
+
+<a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/components/SearchDropDown.js">SearchDropDown 소스코드</a>
+
+<a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/components/HashTag.js">HashTag 소스코드</a>
+
+- ```<SearchBox/>``` 컴포넌트는 검색어와 태그들을 보관하고, 쿼리스트링화 시켜 ```"/search"```에 넘겨줌
+
+- ```<SearchDropDown/>``` 컴포넌트는 ```<SearchBox/>``` 로 부터 검색어를 입력받아서, 
+
+- DB에 저장되어 있는 게시글들의 태그 리스트를 서버로 부터 받아 일치하는 태그 목록을 드롭다운 메뉴로 제공
+
+- 태그 목록에서 하나를 클릭 시 ```<SearchBox/>```컴포넌트의 태그배열에 추가된다.
+
+- ```<HashTag/>``` 컴포넌트는 태그배열을 받아서 중복태그가 추가되지 않도록 관리 및 태그 삭제기능을 가진다.
+
+---
+
+#### Devlog
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog07.md">초창기 검색창과 SearchDropDown</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog08.md">HashTag 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog09.md">검색창 컴포넌트(SearchBox.js)화 및 검색 통신로직 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog18.md">현재의 SearchBox 로직 구현 및 검색결과 페이지와의 연결</a>
+
+---
+
+### Page.js
+
+<a href="https://github.com/kimhaechang1/bePro/blob/main/client/src/components/Page.js">Page 소스코드</a>
+
+- Card 컴포넌트가 쓰이는 곳과 게시판 글 목록 페이지에서 페이지네이션을 위해 사용된다.
+
+- 사용되어지는 페이지에서 url 쿼리 key값, 한 묶음당 페이지 수, 페이지당 글 수, 총 글 개수를 ```props```로 넘겨받는다.
+
+- 항상 1번 페이지로 이동시키는 'begin'버튼과 이전 페이지로 이동하는 'prev'버튼, 끝 번호 페이지로 이동시키는 'end'버튼과 다음 페이지로 이동하는 'next'버튼이 있다.
+
+---
+
+#### Devlog
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog20.md">페이지네이션 구현</a>
+
+---
+
+### 추가적인 Devlog
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog01.md">초창기 bePro 프로젝트 프론트 간단한 설계</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog02.md">로그인 로그아웃 모달창 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog03.md">로그인 로직 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog04.md">회원가입 로직 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog07.md">백엔드 연결 및 프록시 설정</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog14.md">QnA게시판 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog15.md">API 최적화 및 페이지 예외처리(404)</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog16.md">공지사항 게시판 구현 및 인증 시스템 설계 및 구현</a>
+
+<a href="https://github.com/kimhaechang1/DevLog/blob/main/bePro/devlog17.md">댓글기능 구현</a>
+
+---
